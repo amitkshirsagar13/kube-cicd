@@ -1,0 +1,20 @@
+version: '3'
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jenkins-master
+    container_name: jenkins
+    user: root
+    volumes:
+      - "/var/jenkins:/var/jenkins_home"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      JENKINS_HOST_HOME: '/var/jenkins'
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+      - "50000:50000"
+# Need to make sure we purge content from HOST:/var/jenkins 
+# in order for container to reload content from war and image

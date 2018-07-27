@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: echoserver
+  namespace: dev
+spec:
+  tls:
+  - hosts:
+    - echoserver.dev.gce.k8m.io
+    - echoserver.dev.gke.k8m.io
+    - echoserver.dev.mini.k8m.io
+  - secretName: dev
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: echoserver.dev.gce.k8m.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: echoserver.dev.gke.k8m.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: echoserver.dev.mini.k8m.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /

@@ -1,0 +1,11 @@
+http://localhost:8080/me/configure
+
+
+pip install jenkins-job-builder
+pip install jenkins-job-builder-multibranch-pipeline
+
+Configure Job:
+jenkins-jobs --conf jenkins_jobs.ini update test.yaml
+
+Configure Template:
+jenkins-jobs --conf jenkins_jobs.ini update --delete-old jjb_template.yaml

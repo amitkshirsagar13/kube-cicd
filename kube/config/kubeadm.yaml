@@ -1,0 +1,13 @@
+apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+kubernetesVersion: v1.11.1
+api:
+  advertiseAddress: 192.168.1.123
+  bindPort: 6443
+etcd:
+  endpoints: ["https://etcd0.kubernetes.local:2379","https://etcd1.kubernetes.local:2379","https://etcd2.kubernetes.local:2379"]
+  caFile: /etc/kubernetes/pki/etcd-ca.crt
+  certFile: /etc/kubernetes/pki/apiserver-etcd-client.crt
+  keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
+apiServerExtraArgs:
+  basic-auth-file: /etc/kubernetes/auth.csv

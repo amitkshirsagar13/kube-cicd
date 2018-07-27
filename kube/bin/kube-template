@@ -1,0 +1,17 @@
+# Copyright (C) Amit Kshirsagar - All Rights Reserved
+# Unauthorized copying of this file, via any medium is strictly prohibited
+# Proprietary and confidential
+# Written by Amit Kshirsagar <amit.kshirsagar.13@gmail.com>, Jul, 2018
+# https://github.com/amitkshirsagar13/kube-cicd
+
+if [ ! -z "$1" ]
+then
+        if [ ! -z "$2" ]
+        then
+                kubectl describe XENTITY --namespace $1 $2
+        else
+                kubectl get XENTITY --namespace $1
+        fi
+else
+        kubectl get XENTITY --all-namespaces
+fi

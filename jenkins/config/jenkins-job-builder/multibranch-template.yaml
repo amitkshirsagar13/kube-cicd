@@ -1,0 +1,12 @@
+- job-template:
+    name: '{name}_job'
+    project-type: multibranch-pipeline
+    description: '{description}'
+    multibranch-pipeline:
+      source: # normal scm definitions
+        - git:
+            remote: 'git@github.com:amitkshirsagar13/kube-server.git'
+            credentials-id: 'admin'
+            includes: 'develop release/* feature/*'
+            excludes: 'test/*'
+            ignore-on-push-notifications: false

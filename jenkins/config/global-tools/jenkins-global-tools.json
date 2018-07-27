@@ -1,0 +1,10 @@
+{
+    "maven": {
+        "version": "3.3.3",
+        "name": "M3"
+    },
+    "jdk": {
+        "version": "jdk-8u102-oth-JPR",
+        "name": "jdk8"
+    }
+}

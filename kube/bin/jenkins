@@ -1,0 +1,17 @@
+#!/bin/sh
+RC=`tput setaf 1`
+GC=`tput setaf 2`
+BC=`tput setaf 4`
+NC=`tput sgr0`
+#RED='\033[0;31m'
+#NC='\033[0m' # No Color
+echo ""
+echo "${GC}Login Jenkins Page${NC}"
+
+echo "${BC}http://`services jenkins|grep LoadBalancer|tr -s " " "|"|cut -d "|" -f 4,5|cut -d ":" -f 1|tr -s "|" ":"`/login${NC}"
+echo ""
+echo "${RC}Password: ${GC}`printf $(kubectl get secret --namespace jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo`${NC}"
+echo ""
+echo ""
+
+services jenkins

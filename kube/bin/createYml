@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if [ "$1" = "rbac" ]
+then
+        sed -e "s;XNAMESPACE;$2;g" -e "s;XNAME;$3;g" $HOME/bin/template/$1.yml |tee $1.$2.$3.yml
+elif [ "$1" = "ingress" ]
+then
+        read -p 'HOST: ' XHOST
+        read -p 'PORT: ' XPORT
+        read -p 'SECRET: ' XSECRET
+        read -p 'SERVICE: ' XSERVICE
+
+        sed -e "s;XNAMESPACE;$2;g" -e "s;XNAME;$3;g" -e "s;XHOST;$XHOST;g" -e "s;XPORT;$XPORT;g" -e "s;XSECRET;$XSECRET;g" -e "s;XSERVICE;$XSERVICE;g" $HOME/bin/template/$1.yml |tee $1.$2.$3.yml
+elif [ "$1" = "secret" ]
+then
+        read -p 'type: ' XTYPE
+        read -p 'files: ' XFILE
+        kubectl create secret $XTYPE --namespace $2 $3 --key $XFILE.key --cert $XFILE.crt
+fi
+#rm $1.$2.$3.yml
+cd $PWD
+#apply $1.$2.$3.yml

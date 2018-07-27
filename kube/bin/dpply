@@ -1,0 +1,5 @@
+#!/bin/sh
+for var in "$@"
+do
+  kubectl delete -f $var
+done

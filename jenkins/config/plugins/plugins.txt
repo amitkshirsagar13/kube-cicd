@@ -1,0 +1,9 @@
+workflow-multibranch
+kubernetes
+credentials-binding
+workflow-job
+workflow-aggregator
+docker-plugin
+git
+github
+github-api

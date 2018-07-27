@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: XNAME
+  namespace: XNAMESPACE
+spec:
+  tls:
+  - hosts:
+    - XHOST
+  - secretName: XSECRET
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: XHOST
+      http:
+        paths:
+          - backend:
+              serviceName: XSERVICE
+              servicePort: XPORT
+            path: /

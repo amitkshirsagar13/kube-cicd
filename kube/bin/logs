@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ ! -z "$3" ]
+then
+        kubectl logs -n $1 -f $2 -c $3
+else
+        if [ ! -z "$2" ]
+        then
+                kubectl logs -n $1 -f $2
+        else
+                kubectl get pods --all-namespaces
+        fi
+fi

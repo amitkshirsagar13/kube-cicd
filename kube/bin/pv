@@ -1,0 +1,3 @@
+#!/bin/sh
+#echo $(basename $0)
+sed -e "s;XENTITY;$(basename $0);g" -e 's/\r$//' $HOME/bin/kube-template|sh -s "$@"

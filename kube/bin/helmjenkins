@@ -1,0 +1,11 @@
+#!/bin/sh
+kubectl delete PersistentVolumeClaim -n jenkins jenkins jenkins-persistent-storage-claim
+kubectl delete Secret -n jenkins jenkins
+helm delete --purge jenkins
+#helm install --name jenkins --namespace jenkins stable/jenkins
+#kubectl apply -f $HOME/bin/jenkins.pvc.yml
+#kubectl apply -f $HOME/bin/jenkins.ingress.yml
+#kubectl create secret tls --namespace jenkins jenkins --key $HOME/bin/tls.key --cert $HOME/bin/tls.crt
+kubectl create clusterrolebinding  --namespace jenkins jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
+#helm install --name jenkins --namespace jenkins stable/jenkins --set Persistence.ExistingClaim=jenkins-persistent-storage-claim
+helm install --name jenkins --namespace jenkins stable/jenkins --Master.ServiceType=NodePort

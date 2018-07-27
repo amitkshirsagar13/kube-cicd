@@ -1,0 +1,13 @@
+- job:
+    name: kube-server
+    project-type: multibranch-pipeline
+    display-name: display-name-for-pipeline
+    description: Some Description
+    multibranch-pipeline:
+      source: # normal scm definitions
+        - git:
+            remote: 'https://github.com/amitkshirsagar13/kube-server.git'
+            credentials-id: 'github'
+            includes: 'master develop release/* feature/*'
+            excludes: 'test/*'
+            ignore-on-push-notifications: false

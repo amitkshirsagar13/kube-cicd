@@ -1,0 +1,22 @@
+{
+	"users": [
+		{
+			"user": {
+				"name": "adminjson",
+				"password": "admin"
+			}
+		},
+		{
+			"user": {
+				"name": "adminjson1",
+				"password": "admin"
+			}
+		},
+		{
+			"user": {
+				"name": "ajson",
+				"password": "admin"
+			}
+		}
+	]
+}

@@ -1,0 +1,4 @@
+#!/bin/sh
+kubectl --namespace $1 run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl expose deployment echoserver --type=NodePort --namespace $1
+kubectl create -f $HOME/bin/echoserver.ingress.yml
