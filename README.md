@@ -6,7 +6,7 @@
 
 # kube-cicd
 
-Windows for docker share drive with below command:
+Windows for docker share drive with below command: 
 ```
 Set-NetConnectionProfile -interfacealias "vEthernet (DockerNAT)" -NetworkCategory Private
 ```
