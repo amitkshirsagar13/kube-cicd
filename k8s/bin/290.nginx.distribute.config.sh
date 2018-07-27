@@ -172,6 +172,8 @@ done
 
 source 101.setupNginx.sh
 
+helminit
+
 kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
 helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
 kubectl create namespace dev
