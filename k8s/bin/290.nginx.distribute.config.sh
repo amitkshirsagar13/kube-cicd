@@ -176,8 +176,8 @@ helminit
 kubectl create namespace nginx
 kubectl create namespace dev
 
-kubectl create secret tls dev-cert --namespace dev --key nginx-key.pem --cert nginx.pem
-kubectl create secret tls nginx --namespace dev --key nginx-key.pem --cert nginx.pem
+kubectl create secret tls dev-tls --namespace dev --key nginx-key.pem --cert nginx.pem
+kubectl create secret tls nginx-tls --namespace dev --key nginx-key.pem --cert nginx.pem
 
 kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
 
