@@ -42,11 +42,22 @@ ls -l
 cd ../.. && git reset --hard && git pull && cd k8s/bin && chmod 755 * && ls -l
 
 
-sudo yum install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes 
+yum install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes 
+systemctl enable --now cockpit
 
 sudo vi /etc/ssh/sshd_config
 
+sudo service sshd reload
 sudo passwd
 
-sudo service sshd reload
+```
+
+Test cluster:
+
+```
+kubectl create namespace demo
+kubectl --namespace demo run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl expose deployment echoserver --type=NodePort --namespace demo
+
+curl http://IP:8080/
 ```
