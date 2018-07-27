@@ -22,10 +22,12 @@ else
 fi
 
 
-sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
-sudo mv nginx.conf /etc/nginx/nginx.conf
+mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
+mv nginx.conf /etc/nginx/nginx.conf
+mkdir -p /etc/nginx/k8m
+mv k8m.conf /etc/nginx/k8m/k8m.conf
 
-sudo systemctl enable nginx && sudo systemctl start nginx
+systemctl enable nginx && sudo systemctl start nginx
 #sudo systemctl status nginx
 
 echo "========================================================================="
