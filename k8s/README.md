@@ -39,7 +39,7 @@ chmod 777 -R /root
 chmod 755 *
 ls -l
 
-git reset --hard && git pull && cd k8s/bin && chmod 755 * && ls -l
+cd ../.. && git reset --hard && git pull && cd k8s/bin && chmod 755 * && ls -l
 
 sudo vi /etc/ssh/sshd_config
 

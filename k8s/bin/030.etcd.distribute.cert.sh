@@ -60,7 +60,7 @@ for M in $M2 $M3; do
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 
-source 041.etcd.start.sh
+source 031.etcd.start.sh
 
 echo "========================================================================="
 echo "=== [ ${GREEN}INFO${NC} ] etcd certificate distribution completed                  ==="
