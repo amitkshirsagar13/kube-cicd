@@ -61,3 +61,5 @@ kubectl expose deployment echoserver --type=NodePort --namespace demo
 
 curl http://IP:8080/
 ```
+
+NGINX helm setup pending
