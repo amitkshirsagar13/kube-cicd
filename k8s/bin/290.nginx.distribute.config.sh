@@ -45,8 +45,8 @@ http {
 	ssl on;
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
 	ssl_prefer_server_ciphers on;
-	ssl_certificate /etc/pki/nginx/nginx.crt;
-    ssl_certificate_key /etc/pki/nginx/private/nginx.key;
+	ssl_certificate /etc/pki/nginx/nginx.pem;
+  ssl_certificate_key /etc/pki/nginx/private/nginx-key.pem;
 
 	##
 	# Gzip Settings
@@ -138,10 +138,6 @@ server {
 server {
    listen       443 ssl http2 default_server;
    server_name  *.k8m.k8cluster.io;
-   root         /usr/share/nginx/html;
-   index index.html index.htm;
-   ssl_certificate "/etc/pki/nginx/server.crt";
-   ssl_certificate_key "/etc/pki/nginx/private/server.key";
    location / {
      proxy_pass https://localhost:30443/;
      proxy_set_header Host $host;
@@ -153,12 +149,20 @@ server {
 
 EOF
 
+sudo /usr/local/bin/cfssl print-defaults csr |sudo tee nginx.json
+sudo sed -i '0,/CN/{s/example\.net/'"$PEERNAME${SERVER_DOMAIN}"'/}' nginx.json
+sudo sed -i 's/www\.example\.net/'"$PRIVATEIP"'/' nginx.json
+sudo sed -i 's/example\.net/'$PEERNAME'/' nginx.json
+sudo sed -i 's/ecdsa/rsa/' nginx.json
+sudo sed -i 's/256/2048/' nginx.json
+sudo /usr/local/bin/cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server nginx.json |sudo /usr/local/bin/cfssljson -bare nginx
+
 muser=$USER # cluster.conf USER, need to be OS user will work with only user/password login
 for M in $M2 $M3; do
     host="${M}${SERVER_DOMAIN}"
     echo "[ ${GREEN}INFO${NC} ] Distributing nginx.conf to $muser@$host"
     # upload certs and distribution using scp
-    sudo -S -u $USER scp nginx.conf k8m.conf $muser@$host:/tmp/
+    sudo -S -u $USER scp nginx.conf k8m.conf nginx.pem nginx-key.pem nginx.csr $muser@$host:/tmp/
     # Execute distribution Script to move certs to right folders
 
     echo "[ ${BLUE}WARN${NC} ] Execute Below Set of commands :
@@ -167,6 +171,12 @@ for M in $M2 $M3; do
 done
 
 source 101.setupNginx.sh
+
+
+kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
+helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+kubectl create namespace dev
+kubectl create secret tls dev-cert --namespace dev --key /tmp/tls.key --cert /tmp/tls.crt
 
 echo "========================================================================="
 echo "=== [ ${GREEN}INFO${NC} ] Nginx configuration distributed to Masters               ==="

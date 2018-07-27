@@ -23,9 +23,16 @@ fi
 
 
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
-mv nginx.conf /etc/nginx/nginx.conf
+
 mkdir -p /etc/nginx/k8m
+mkdir -p /etc/pki/nginx/private
+
 mv k8m.conf /etc/nginx/k8m/k8m.conf
+mv nginx.conf /etc/nginx/nginx.conf
+
+mv nginx.csr /etc/pki/nginx/nginx.csr
+mv nginx.pem /etc/pki/nginx/nginx.pem
+mv nginx-key.pem /etc/pki/nginx/private/nginx-key.pem
 
 systemctl enable nginx && sudo systemctl start nginx
 #sudo systemctl status nginx

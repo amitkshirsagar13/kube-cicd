@@ -32,8 +32,11 @@ Install git first to start further installation
 
 ```
 sudo su -
-yum -y install git
+yum -y install git p7zip-full curl wget
 git clone https://github.com/amitkshirsagar13/kube-cicd.git
+
+curl -Ls https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/deploy.sh |sed -e 's/\r$//' | sh
+
 cd kube-cicd/k8s/bin
 chmod 777 -R /root
 chmod 755 *

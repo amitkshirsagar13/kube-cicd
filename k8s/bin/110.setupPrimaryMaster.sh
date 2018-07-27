@@ -90,6 +90,8 @@ for M in $M2 $M3; do
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 
+helminit
+
 echo "========================================================================="
 echo "=== [ ${GREEN}INFO${NC} ] Kubernetes Primary Master setup completed                ==="
 echo "========================================================================="
