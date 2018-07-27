@@ -41,6 +41,9 @@ ls -l
 
 cd ../.. && git reset --hard && git pull && cd k8s/bin && chmod 755 * && ls -l
 
+
+sudo yum install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes 
+
 sudo vi /etc/ssh/sshd_config
 
 sudo passwd
