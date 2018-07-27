@@ -1,4 +1,4 @@
-# Copyright (C) Amit Kshirsagar - All Rights Reserved
+# Copyright Amit Kshirsagar - All Rights Reserved
 # Unauthorized copying of this file, via any medium is strictly prohibited
 # Proprietary and confidential
 # Written by Amit Kshirsagar <amit.kshirsagar.13@gmail.com>, Jul, 2018
