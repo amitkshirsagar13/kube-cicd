@@ -52,7 +52,7 @@ for M in $M2 $M3; do
     # Execute distribution Script to move certs to right folders
 
     echo "[ ${BLUE}WARN${NC} ] Execute Below Set of commands :
-    cd /tmp && ./101.setupNginx.sh && exit"
+    cd /tmp && ./291.setupNginx.sh && exit"
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 

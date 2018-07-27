@@ -56,7 +56,7 @@ for M in $M2 $M3; do
     sudo -S -u $USER scp ca.pem ca-key.pem client.pem client-key.pem ca-config.json /tmp/distributeEtcdCerts.sh $current/* $muser@$host:/tmp/
     # Execute distribution Script to move certs to right folders
     echo "[ ${BLUE}WARN${NC} ] Execute Below Set of commands :
-    cd /tmp && chmod 777 *.sh && ./000.precheck.sh && ./010.k8s.installation.sh && ./distributeEtcdCerts.sh && ./041.etcd.start.sh && exit"
+    cd /tmp && chmod 777 *.sh && ./000.precheck.sh && ./010.k8s.installation.sh && ./distributeEtcdCerts.sh && ./031.etcd.start.sh && exit"
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 

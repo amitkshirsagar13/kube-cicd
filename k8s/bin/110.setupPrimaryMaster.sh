@@ -85,7 +85,7 @@ for M in $M2 $M3; do
     sudo -S -u $USER scp ca.crt [cs]a.key sa.pub /tmp/distributeMasterCerts.sh $muser@$host:/tmp/
     # Execute distribution Script to move certs to right folders
     echo "[ ${BLUE}WARN${NC} ] Execute Below Set of commands :
-    cd /tmp && chmod 777 distributeMasterCerts.sh && ./distributeMasterCerts.sh && ./071.setupSecondaryMaster.sh && exit"
+    cd /tmp && chmod 777 distributeMasterCerts.sh && ./distributeMasterCerts.sh && ./111.setupSecondaryMaster.sh && exit"
     
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
