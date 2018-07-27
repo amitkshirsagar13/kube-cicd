@@ -170,14 +170,22 @@ for M in $M2 $M3; do
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 
-source 101.setupNginx.sh
 
 helminit
 
-kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
-helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+kubectl create namespace nginx
 kubectl create namespace dev
-kubectl create secret tls dev-cert --namespace dev --key /tmp/tls.key --cert /tmp/tls.crt
+
+kubectl create secret tls dev-cert --namespace dev --key nginx-key.pem --cert nginx.pem
+kubectl create secret tls nginx --namespace dev --key nginx-key.pem --cert nginx.pem
+
+kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
+
+helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+kubectl create -f echoserver.ingress.yml
+
+source 291.setupNginx.sh
+
 
 echo "========================================================================="
 echo "=== [ ${GREEN}INFO${NC} ] Nginx configuration distributed to Masters               ==="
