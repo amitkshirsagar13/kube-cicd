@@ -95,6 +95,7 @@ EOF
 systemctl daemon-reload
 systemctl enable --now etcd
 systemctl status etcd
+sleep 2
 
 etcdctl -ca-file $etcd_certs/ca.pem --cert-file $etcd_certs/client.pem --key-file $etcd_certs/client-key.pem --endpoint https://$PRIVATEIP:2379 member list
 
