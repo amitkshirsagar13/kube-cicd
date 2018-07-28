@@ -60,6 +60,7 @@ for M in $M2 $M3; do
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 
+cd $current
 source 031.etcd.start.sh
 
 echo "========================================================================="
