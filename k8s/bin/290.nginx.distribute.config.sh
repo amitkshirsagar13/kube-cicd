@@ -53,10 +53,10 @@ sleep 10
 
 
 kubectl create namespace dev
-kubectl create secret tls dev-tls --namespace dev --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
-kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
-kubectl --namespace dev expose deployment echoserver --type=NodePort
-kubectl create -f echoserver.ingress.yml
+kubectl create secret tls dev-tls --namespace nginx-ingress --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
+kubectl --namespace nginx-ingress run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl --namespace nginx-ingress expose deployment echoserver --type=NodePort
+kubectl apply -f echoserver.ingress.yml
 
 source 291.setupNginx.sh
 

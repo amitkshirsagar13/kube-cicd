@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/tls-acme: "true"
   name: echoserver
-  namespace: dev
+  namespace: nginx-ingress
 spec:
   tls:
   - hosts:
