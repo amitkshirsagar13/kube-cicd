@@ -43,18 +43,17 @@ helminit
 
 sleep 10
 
-kubectl create namespace nginx
+# kubectl create namespace nginx
+# kubectl create secret tls nginx-tls --namespace nginx --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
+
+# kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
+
+# #helm upgrade --install nginx --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.kind=daemonset --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+# helm upgrade --install nginx --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+
+
 kubectl create namespace dev
-
 kubectl create secret tls dev-tls --namespace dev --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
-kubectl create secret tls nginx-tls --namespace dev --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
-
-kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
-
-#helm upgrade --install nginx --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.kind=daemonset --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
-helm upgrade --install nginx --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
-
-
 kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl --namespace dev expose deployment echoserver --type=NodePort
 kubectl create -f echoserver.ingress.yml
