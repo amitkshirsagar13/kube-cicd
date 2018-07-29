@@ -13,14 +13,13 @@ echo "[ ${GREEN}INFO${NC} ] Generating nginx ingress daemonset on all nodes"
 
 kubectl apply -f common/ns-and-sa.yaml
 kubectl create secret tls nginx-tls-secret --namespace nginx-ingress --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
-
 kubectl apply -f common/nginx-config.yaml
 kubectl apply -f rbac/rbac.yaml
-kubectl apply -f daemon-set/nginx-ingress.yaml
 kubectl apply -f deployment/default-http-backend.yaml
+kubectl apply -f daemon-set/nginx-ingress.yaml
 
 sleep 5
-pods nginx-ingress
+pods nginx
 
 echo "========================================================================="
 echo "=== [ ${GREEN}INFO${NC} ] Nginx Ingress configuration deployed all nodes           ==="
