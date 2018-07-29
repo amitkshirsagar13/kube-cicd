@@ -9,7 +9,7 @@ source colorCode.sh
 source k8s.conf
 source cluster.conf
 
-sudo rm -f nginx.conf
+#sudo rm -f nginx.conf
 
 echo "[ ${GREEN}INFO${NC} ] Generating nginx config file"
 
