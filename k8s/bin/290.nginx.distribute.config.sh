@@ -22,7 +22,7 @@ sudo sed -i 's/example\.net/'$PEERNAME'/' nginx.json
 sudo sed -i 's/ecdsa/rsa/' nginx.json
 sudo sed -i 's/256/2048/' nginx.json
 sudo /usr/local/bin/cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server nginx.json |sudo /usr/local/bin/cfssljson -bare nginx
-
+chmod 666 nginx-key.pem
 muser=$USER # cluster.conf USER, need to be OS user will work with only user/password login
 for M in $M2 $M3; do
     host="${M}${SERVER_DOMAIN}"
@@ -36,7 +36,7 @@ for M in $M2 $M3; do
     sudo -S -u $USER ssh $muser@$host "sudo su - "
 done
 
-
+chmod 644 nginx-key.pem
 
 
 helminit

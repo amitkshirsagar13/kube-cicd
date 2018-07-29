@@ -33,7 +33,7 @@ cp nginx.conf /etc/nginx/nginx.conf
 cp nginx.csr /etc/pki/nginx/nginx.csr
 sudo cp nginx.pem /etc/pki/nginx/nginx.pem
 sudo cp nginx-key.pem /etc/pki/nginx/private/nginx-key.pem
-
+sudo chmod 644 /etc/pki/nginx/private/nginx-key.pem
 systemctl enable nginx && sudo systemctl start nginx
 #sudo systemctl status nginx
 
