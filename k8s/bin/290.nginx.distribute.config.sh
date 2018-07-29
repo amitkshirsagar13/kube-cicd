@@ -16,7 +16,6 @@ echo "[ ${GREEN}INFO${NC} ] Generating nginx config file"
 cat > nginx.conf << EOF
 user nginx;
 worker_processes auto;
-access_log  /var/log/nginx/access.log;
 error_log   /var/log/nginx/error.log info;
 pid         /var/run/nginx.pid;
 
@@ -37,7 +36,7 @@ http {
 	# server_names_hash_bucket_size 64;
 	# server_name_in_redirect off;
 
-	include /etc/nginx/mime.types;
+  include /etc/nginx/mime.types;
 	default_type application/octet-stream;
 	##
 	# SSL Settings
@@ -65,7 +64,8 @@ http {
 	##
 	# Virtual Host Configs
 	##
-
+  access_log  /var/log/nginx/access.log;
+	
 	include /etc/nginx/conf.d/*.conf;
 	#include /etc/nginx/sites-enabled/*;
 	include /etc/nginx/k8m/k8m.conf;
@@ -74,12 +74,6 @@ http {
 EOF
 
 cat > k8m.conf << EOF
-
-map $http_upgrade $connection_upgrade {
-        default upgrade;
-        '' close;
-}
-
 server {
    listen         80;
    return 301 https://$host$request_uri;
@@ -171,17 +165,23 @@ for M in $M2 $M3; do
 done
 
 
+
+
 helminit
 
 kubectl create namespace nginx
 kubectl create namespace dev
 
-kubectl create secret tls dev-tls --namespace dev --key nginx-key.pem --cert nginx.pem
-kubectl create secret tls nginx-tls --namespace dev --key nginx-key.pem --cert nginx.pem
+kubectl create secret tls dev-tls --namespace dev --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
+kubectl create secret tls nginx-tls --namespace dev --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 
 kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
 
 helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+
+
+kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl --namespace dev expose deployment echoserver --type=NodePort
 kubectl create -f echoserver.ingress.yml
 
 source 291.setupNginx.sh
