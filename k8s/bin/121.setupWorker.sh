@@ -13,5 +13,9 @@ source cluster.conf
 source worker-command
 
 echo "========================================================================="
+scriptName=`echo $0|cut -d "/" -f2`
+echo "=== [ ${GREEN}INFO${NC} ] Executing Current Script $scriptName"
+echo "=== [ ${GREEN}INFO${NC} ] Next Few Scripts: 
+`ls -1 |grep -A2 $scriptName`"
 echo "=== [ ${GREEN}INFO${NC} ] Kubernetes cluster joined by worker                      ==="
 echo "========================================================================="

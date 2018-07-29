@@ -99,5 +99,9 @@ chmod 755 /etc/keepalived/apiserver_check.sh
 systemctl enable keepalived && systemctl start keepalived && systemctl status keepalived
 
 echo "========================================================================="
+scriptName=`echo $0|cut -d "/" -f2`
+echo "=== [ ${GREEN}INFO${NC} ] Executing Current Script $scriptName"
+echo "=== [ ${GREEN}INFO${NC} ] Next Few Scripts: 
+`ls -1 |grep -A2 $scriptName`"
 echo "=== [ ${GREEN}INFO${NC} ] VIP configuration completed                              ==="
 echo "========================================================================="

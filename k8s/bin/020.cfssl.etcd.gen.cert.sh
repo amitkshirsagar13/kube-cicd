@@ -92,5 +92,9 @@ chmod 755 *.*
 echo "[ ${GREEN}INFO${NC} ] `pwd && ls -ltr`"
 
 echo "========================================================================="
+scriptName=`echo $0|cut -d "/" -f2`
+echo "=== [ ${GREEN}INFO${NC} ] Executing Current Script $scriptName"
+echo "=== [ ${GREEN}INFO${NC} ] Next Few Scripts: 
+`ls -1 |grep -A2 $scriptName`"
 echo "=== [ ${GREEN}INFO${NC} ] etcd certificate generation completed                    ==="
 echo "========================================================================="

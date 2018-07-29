@@ -178,5 +178,9 @@ echo "[ ${GREEN}INFO${NC} ] Flannel Pods Status"
 kubectl get po -n kube-system |grep flannel
 
 echo "========================================================================="
+scriptName=`echo $0|cut -d "/" -f2`
+echo "=== [ ${GREEN}INFO${NC} ] Executing Current Script $scriptName"
+echo "=== [ ${GREEN}INFO${NC} ] Next Few Scripts: 
+`ls -1 |grep -A2 $scriptName`"
 echo "=== [ ${GREEN}INFO${NC} ] flannel kubernetes cni started                           ==="
 echo "========================================================================="

@@ -91,5 +91,9 @@ for M in $M2 $M3; do
 done
 
 echo "========================================================================="
+scriptName=`echo $0|cut -d "/" -f2`
+echo "=== [ ${GREEN}INFO${NC} ] Executing Current Script $scriptName"
+echo "=== [ ${GREEN}INFO${NC} ] Next Few Scripts: 
+`ls -1 |grep -A2 $scriptName`"
 echo "=== [ ${GREEN}INFO${NC} ] Kubernetes Primary Master setup completed                ==="
 echo "========================================================================="
