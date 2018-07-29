@@ -33,7 +33,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         args:
-          - "--nginx-configmaps=$(POD_NAMESPACE)/nginx-config"
-          - "--default-backend-service=$(POD_NAMESPACE)/default-http-backend"
-          - "--default-server-tls-secret=$(POD_NAMESPACE)/nginx-tls-secret"
+          - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
+          - -default-backend-service=$(POD_NAMESPACE)/default-http-backend
+          - -default-server-tls-secret=$(POD_NAMESPACE)/nginx-tls-secret
          #- -v=3 # Enables extensive logging. Useful for trooublshooting.
