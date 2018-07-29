@@ -41,6 +41,8 @@ done
 
 helminit
 
+sleep 10
+
 kubectl create namespace nginx
 kubectl create namespace dev
 
