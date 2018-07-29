@@ -17,6 +17,7 @@ kubectl create secret tls nginx-tls-secret --namespace nginx-ingress --key /etc/
 kubectl apply -f common/nginx-config.yaml
 kubectl apply -f rbac/rbac.yaml
 kubectl apply -f daemon-set/nginx-ingress.yaml
+kubectl apply -f deployment/default-http-backend.yaml
 
 sleep 5
 pods nginx-ingress
