@@ -6,41 +6,43 @@ metadata:
 rules:
 - apiGroups:
   - ""
-  resources:
-  - services
-  - endpoints
-  verbs: 
-  - list
-  - watch
-- apiGroups: 
-  - ""
+  - "extensions"
   resources:
   - configmaps
   - secrets
+  - services
+  - endpoints
+  - ingresses
+  - nodes
+  - pods
   verbs:
-  - get
   - list
   - watch
 - apiGroups:
   - ""
+  - "extensions"
   resources:
-  - pods
+  - ingresses
+  - secrets
   verbs:
-  - list
+  - get
 - apiGroups:
   - ""
   resources:
   - events
+  - services
   verbs:
   - create
-  - patch
+  - list
+  - update
+  - get
 - apiGroups:
-  - extensions
+  - "extensions"
   resources:
+  - ingresses/status
   - ingresses
   verbs:
-  - list
-  - watch
+  - update
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
