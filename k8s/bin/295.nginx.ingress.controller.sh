@@ -15,6 +15,10 @@ kubectl apply -f common/ns-and-sa.yaml
 kubectl --namespace nginx-ingress create secret tls nginx-tls-secret --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl apply -f common/nginx-config.yaml
 kubectl apply -f rbac/rbac.yaml
+
+kubectl delete clusterrolebinding nginx-ingress
+kubectl create clusterrolebinding nginx-ingress --clusterrole cluster-admin --serviceaccount=nginx-ingress:nginx-ingress
+
 kubectl apply -f deployment/default-http-backend.yaml
 kubectl apply -f daemon-set/nginx-ingress.yaml
 

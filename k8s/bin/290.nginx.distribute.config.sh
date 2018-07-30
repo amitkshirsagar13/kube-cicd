@@ -53,10 +53,12 @@ sleep 10
 
 
 kubectl create namespace dev
+kubectl --namespace nginx-ingress create secret tls nginx-tls-secret --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl --namespace dev create secret tls dev-tls --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl --namespace dev expose deployment echoserver --type=NodePort
-kubectl apply -f ingress/echoserver.ingress.yml
+# Only HTTP working, issue with tls secret reading in nginx controller from other namespace
+kubectl apply -f ingress/echoserver.ingress.http.yml
 
 source 291.setupNginx.sh
 

@@ -8,14 +8,8 @@ metadata:
   name: echoserver
   namespace: dev
 spec:
-  tls:
-  - hosts:
-    - echoserver.dev.gce.k8m.k8cluster.io
-    - echoserver.dev.gke.k8m.k8cluster.io
-    - echoserver.dev.mini.k8m.k8cluster.io
-  - secretName: dev-tls
   backend:
-    serviceName: nginx-ingress/default-http-backend
+    serviceName: default-http-backend
     servicePort: 80
   rules:
     - host: echoserver.dev.gce.k8m.k8cluster.io
