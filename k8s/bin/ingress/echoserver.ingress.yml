@@ -15,7 +15,7 @@ spec:
     - echoserver.dev.mini.k8m.k8cluster.io
   - secretName: dev-tls
   backend:
-    serviceName: default-http-backend
+    serviceName: nginx-ingress/default-http-backend
     servicePort: 80
   rules:
     - host: echoserver.dev.gce.k8m.k8cluster.io
