@@ -11,6 +11,7 @@ source cluster.conf
 
 echo "[ ${GREEN}INFO${NC} ] Generating nginx ingress daemonset on all nodes"
 
+kubectl create namespace nginx-ingress
 kubectl apply -f common/ns-and-sa.yaml
 kubectl --namespace nginx-ingress create secret tls nginx-tls-secret --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl apply -f common/nginx-config.yaml

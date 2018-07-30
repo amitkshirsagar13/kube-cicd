@@ -52,6 +52,7 @@ sleep 10
 # helm upgrade --install nginx --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
 
 
+kubectl delete namespace dev
 kubectl create namespace dev
 kubectl --namespace nginx-ingress create secret tls nginx-tls-secret --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl --namespace dev create secret tls dev-tls --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
