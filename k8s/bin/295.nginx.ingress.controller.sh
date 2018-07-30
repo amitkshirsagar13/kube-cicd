@@ -12,15 +12,15 @@ source cluster.conf
 echo "[ ${GREEN}INFO${NC} ] Generating nginx ingress daemonset on all nodes"
 
 kubectl create namespace nginx-ingress
+sleep 5
 kubectl apply -f common/ns-and-sa.yaml
 kubectl --namespace nginx-ingress create secret tls nginx-tls-secret --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl apply -f common/nginx-config.yaml
+kubectl apply -f common/default-server-secret.yaml
 # ClusterAdmin to nginx-ingress controller serviceAccount
+kubectl delete clusterrolebinding nginx-ingress
 #kubectl apply -f rbac/rbac.yaml
 kubectl apply -f rbac/rbac.admin.yaml
-
-kubectl delete clusterrolebinding nginx-ingress
-kubectl create clusterrolebinding nginx-ingress --clusterrole cluster-admin --serviceaccount=nginx-ingress:nginx-ingress
 
 kubectl apply -f deployment/default-http-backend.yaml
 kubectl apply -f daemon-set/nginx-ingress.yaml

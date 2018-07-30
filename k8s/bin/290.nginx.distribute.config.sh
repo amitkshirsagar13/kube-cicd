@@ -54,12 +54,13 @@ sleep 10
 
 kubectl delete namespace dev
 kubectl create namespace dev
-kubectl --namespace nginx-ingress create secret tls nginx-tls-secret --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl --namespace dev create secret tls dev-tls --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl --namespace dev expose deployment echoserver --type=NodePort
-# Only HTTP working, issue with tls secret reading in nginx controller from other namespace
-kubectl apply -f ingress/echoserver.ingress.http.yml
+
+kubectl apply -f ingress/echoserver.ingress.https.yml
+
+kubectl apply -f cafe/coffee.yaml
 
 echo "[ ${GREEN}INFO${NC} ] http://echoserver.dev.gce.k8m.k8cluster.io:30080/"
 
