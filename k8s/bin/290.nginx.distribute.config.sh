@@ -61,6 +61,8 @@ kubectl --namespace dev expose deployment echoserver --type=NodePort
 # Only HTTP working, issue with tls secret reading in nginx controller from other namespace
 kubectl apply -f ingress/echoserver.ingress.http.yml
 
+echo "[ ${GREEN}INFO${NC} ] http://echoserver.dev.gce.k8m.k8cluster.io:30080/"
+
 source 291.setupNginx.sh
 
 
