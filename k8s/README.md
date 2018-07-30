@@ -54,15 +54,7 @@ sudo service sshd reload
 sudo passwd
 
 ```
+Add hosts entry as below:
+IPADDRESS cockpit.k8m.k8cluster.io echoserver.dev.gce.k8m.k8cluster.io sechoserver.dev.gce.k8m.k8cluster.io cafe.dev.gce.k8m.k8cluster.io tea.dev.gce.k8m.k8cluster.io test.dev.gce.k8m.k8cluster.io
 
 Test cluster:
-
-```
-kubectl create namespace demo
-kubectl --namespace demo run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
-kubectl expose deployment echoserver --type=NodePort --namespace demo
-
-curl http://IP:8080/
-```
-
-NGINX helm setup pending
