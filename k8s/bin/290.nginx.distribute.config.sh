@@ -58,11 +58,16 @@ kubectl --namespace dev create secret tls dev-tls --key /etc/pki/nginx/private/n
 kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl --namespace dev expose deployment echoserver --type=NodePort
 
+kubectl apply -f ingress/echoserver.ingress.http.yml
 kubectl apply -f ingress/echoserver.ingress.https.yml
 
 kubectl apply -f cafe/coffee.yaml
 
 echo "[ ${GREEN}INFO${NC} ] http://echoserver.dev.gce.k8m.k8cluster.io:30080/"
+echo "[ ${GREEN}INFO${NC} ] https://sechoserver.dev.gce.k8m.k8cluster.io:30443/"
+echo "[ ${GREEN}INFO${NC} ] https://sechoserver.dev.gce.k8m.k8cluster.io/"
+echo "[ ${GREEN}INFO${NC} ] https://cafe.dev.gce.k8m.k8cluster.io/"
+echo "[ ${GREEN}INFO${NC} ] https://tea.dev.gce.k8m.k8cluster.io/"
 
 source 291.setupNginx.sh
 
