@@ -34,6 +34,9 @@ cp nginx.csr /etc/pki/nginx/nginx.csr
 sudo cp nginx.pem /etc/pki/nginx/nginx.pem
 sudo cp nginx-key.pem /etc/pki/nginx/private/nginx-key.pem
 sudo chmod 644 /etc/pki/nginx/private/nginx-key.pem
+
+setsebool -P httpd_can_network_connect true
+
 systemctl enable nginx && sudo systemctl start nginx
 #sudo systemctl status nginx
 
