@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cafe-secret
+  namespace: cafe
 type: Opaque
 data:
   tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUQ4RENDQXRpZ0F3SUJBZ0lKQU9jbHdCelprYmlhTUEwR0NTcUdTSWIzRFFFQkJRVUFNRmd4Q3pBSkJnTlYKQkFZVEFsVlRNUXN3Q1FZRFZRUUlFd0pEUVRFaE1COEdBMVVFQ2hNWVNXNTBaWEp1WlhRZ1YybGtaMmwwY3lCUQpkSGtnVEhSa01Sa3dGd1lEVlFRREV4QmpZV1psTG1WNFlXMXdiR1V1WTI5dE1CNFhEVEUzTURnek1URXdNVGN5Ck1Gb1hEVEU0TURnek1URXdNVGN5TUZvd1dERUxNQWtHQTFVRUJoTUNWVk14Q3pBSkJnTlZCQWdUQWtOQk1TRXcKSHdZRFZRUUtFeGhKYm5SbGNtNWxkQ0JYYVdSbmFYUnpJRkIwZVNCTWRHUXhHVEFYQmdOVkJBTVRFR05oWm1VdQpaWGhoYlhCc1pTNWpiMjB3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQzdIT0xJCm5oZjE1aUcxOE16RXBzN0lvZmxHQmovMi9NVjA0OWtBS0hrTnZOem1XaXRXWDV2QU1yRkF5THY0dXBIWDI5b0IKa3l6YUhlYyt2TlFibEh1bStINUtkUWZXWHFXNkJ6UnVhMzBreEkrcG91cnhpNy9jaDJORS92djBhRGtvaTJ0RAovOUI2aHAyVkoxWXFJdm9hQ2wwSmFYWDd0WEc4SGU1S1BSZzBYMm1Mblcwa29tay9ZVGRPbS9xOVRjUDRnUmhrCms3bUhJMDlSME5vNUhTbURydmVBWFEyY3lGWVJQVUNjWkNPd0h6UUdVUVB1UU0wNVArWUNnVlNRcElKWFV0b0kKbGdEMHhZZUw4UU1rZjZ0TWpYcXpTVVRhQlhzNkRKU2x1YWN1aHpkV212UnFPUVNNYlVpZ3dVUEZCRDVLRUFIcwozM0hHeVZ5dkI4cVlrYUczQWdNQkFBR2pnYnd3Z2Jrd0hRWURWUjBPQkJZRUZOdTQvMTdpSituRGxPMkoyVisvCitqM2x5SzVZTUlHSkJnTlZIU01FZ1lFd2Y0QVUyN2ovWHVJbjZjT1U3WW5aWDcvNlBlWElybGloWEtSYU1GZ3gKQ3pBSkJnTlZCQVlUQWxWVE1Rc3dDUVlEVlFRSUV3SkRRVEVoTUI4R0ExVUVDaE1ZU1c1MFpYSnVaWFFnVjJsawpaMmwwY3lCUWRIa2dUSFJrTVJrd0Z3WURWUVFERXhCallXWmxMbVY0WVcxd2JHVXVZMjl0Z2drQTV5WEFITm1SCnVKb3dEQVlEVlIwVEJBVXdBd0VCL3pBTkJna3Foa2lHOXcwQkFRVUZBQU9DQVFFQUtGUHJBcXA3a3lzTDVGNnMKWFhWdXZkZzAyc0srUlpzb2F3QWVxbHlSRmpJeUlQL2VTajBhQjQwQmNOcWFyRHhwNjhBd1pZNG4yQk9EVmo5WgphOFlvV1YyOFpwamloaThxNnBPSElOa0MrOXpCY1hsZ2lvVUZBTERCcXFPTXFUZkw1cjNGejNUTGN1clozajhuCnUzL2hRVHNXZG5TZENWbmN0aXhaUHJ5cnhJSFlWSERiVHF4ZWdTQUN6WkU1MHMwdlRpMFJkNUkrcVdubVpIUloKL0hLNVZnNWlNS2E1clBPRTFaT2M3L2VnVjZ6R2p4THJiNEdlQ2JyTjBBb01tazNpL2d2K2kzL0N6aTlXOVhNNApwa2hQSjJUcEtMSjVaOHgxUVhjUW5Dem5yOEdtL2FuVzV4b3lDdWhjZzlXMlVSYzRKVTZ1UXh0WU9tczYrc0RxCjBBN1Y3UT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
@@ -12,6 +13,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: coffee
+  namespace: cafe
 spec:
   replicas: 2
   selector:
@@ -32,6 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: coffee-svc
+  namespace: cafe
 spec:
   ports:
   - port: 80
@@ -45,6 +48,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: tea
+  namespace: cafe
 spec:
   replicas: 3
   selector:
@@ -65,6 +69,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tea-svc
+  namespace: cafe
   labels:
 spec:
   ports:
@@ -79,21 +84,22 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: cafe-ingress
+  namespace: cafe
 spec:
   tls:
   - hosts:
-    - cafe.dev.gce.k8m.k8cluster.io
-    - tea.dev.gce.k8m.k8cluster.io
+    - coffee.cafe.gce.k8m.k8cluster.io
+    - tea.cafe.gce.k8m.k8cluster.io
     secretName: cafe-secret
   rules:
-  - host: tea.dev.gce.k8m.k8cluster.io
+  - host: tea.cafe.gce.k8m.k8cluster.io
     http:
       paths:
       - path: /
         backend:
           serviceName: tea-svc
           servicePort: 80
-  - host: cafe.dev.gce.k8m.k8cluster.io
+  - host: coffee.cafe.gce.k8m.k8cluster.io
     http:
       paths:
       - path: /

@@ -54,6 +54,7 @@ sleep 10
 
 kubectl delete namespace dev
 kubectl create namespace dev
+sleep 5
 kubectl --namespace dev create secret tls dev-tls --key /etc/pki/nginx/private/nginx-key.pem --cert /etc/pki/nginx/nginx.pem
 kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl --namespace dev expose deployment echoserver --type=NodePort
