@@ -25,3 +25,4 @@ COPY config/kubernetes/kubernetes.groovy /usr/share/jenkins/ref/init.groovy.d/ku
 
 RUN chmod 777 -R /run/secrets
 RUN chmod 777 -R /var/jenkins_home
+USER jenkins
