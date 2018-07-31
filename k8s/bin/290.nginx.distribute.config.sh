@@ -62,6 +62,10 @@ kubectl --namespace dev expose deployment echoserver --type=NodePort
 kubectl apply -f ingress/echoserver.ingress.http.yml
 kubectl apply -f ingress/echoserver.ingress.https.yml
 
+# cafe Sample: 
+kubectl delete namespace cafe
+kubectl create namespace cafe
+sleep 5
 kubectl apply -f cafe/coffee.yaml
 
 echo "[ ${GREEN}INFO${NC} ] http://echoserver.dev.gce.k8m.k8cluster.io:30080/"
