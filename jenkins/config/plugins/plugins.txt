@@ -1,6 +1,7 @@
 workflow-multibranch
 kubernetes
 credentials-binding
+pipeline-maven
 workflow-job
 workflow-aggregator
 docker-plugin

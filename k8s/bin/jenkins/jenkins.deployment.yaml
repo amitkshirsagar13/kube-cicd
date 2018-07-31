@@ -52,6 +52,12 @@ spec:
             containerPort: 5000
           - name: jnlp-port
             containerPort: 50000
+        volumeMounts:
+          - name: jenkins-home
+            mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
