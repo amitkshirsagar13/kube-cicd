@@ -17,26 +17,42 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULL_NAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <jdks/>
+  <jdks>
+    <jdk>
+      <name>jdk8</name>
+      <home></home>
+      <properties>
+        <hudson.tools.InstallSourceProperty>
+          <installers>
+            <hudson.tools.JDKInstaller plugin="jdk-tool@1.1">
+              <id>jdk-8u102-oth-JPR</id>
+              <acceptLicense>true</acceptLicense>
+            </hudson.tools.JDKInstaller>
+          </installers>
+        </hudson.tools.InstallSourceProperty>
+      </properties>
+    </jdk>
+  </jdks>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@1.9.2">
+    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@1.10.2">
       <name>kubernetes</name>
       <defaultsProviderTemplate></defaultsProviderTemplate>
       <templates>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
           <inheritFrom></inheritFrom>
-          <name>slave</name>
+          <name>jenkins-slave</name>
           <namespace>jenkins</namespace>
           <privileged>false</privileged>
           <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
           <alwaysPullImage>false</alwaysPullImage>
-          <instanceCap>2147483647</instanceCap>
-          <slaveConnectTimeout>100</slaveConnectTimeout>
-          <idleMinutes>500</idleMinutes>
-          <activeDeadlineSeconds>0</activeDeadlineSeconds>
-          <label>debian-8</label>
+          <instanceCap>2</instanceCap>
+          <slaveConnectTimeout>36000</slaveConnectTimeout>
+          <idleMinutes>1440</idleMinutes>
+          <activeDeadlineSeconds>3600</activeDeadlineSeconds>
+          <label>jenkins-slave</label>
+          <serviceAccount>jenkins:default</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
           <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
@@ -47,7 +63,7 @@
           <containers>
             <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
               <name>jenkins-slave</name>
-              <image>jenkinsci/jnlp-slave</image>
+              <image>jenkinsci/slave</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
               <workingDir>/home/jenkins</workingDir>
@@ -73,17 +89,18 @@
           <envVars/>
           <annotations/>
           <imagePullSecrets/>
+          <nodeProperties/>
           <yaml></yaml>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
       </templates>
-      <serverUrl>http://localhost:8443</serverUrl>
-      <skipTlsVerify>true</skipTlsVerify>
+      <serverUrl>https://192.168.1.123:6443</serverUrl>
+      <skipTlsVerify>false</skipTlsVerify>
       <addMasterProxyEnvVars>false</addMasterProxyEnvVars>
       <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
       <namespace>jenkins</namespace>
-      <jenkinsUrl>http://localhost:8080</jenkinsUrl>
-      <jenkinsTunnel>localhost:50000</jenkinsTunnel>
-      <credentialsId>kubernetes</credentialsId>
+      <jenkinsUrl>http://10.105.128.160:8080/</jenkinsUrl>
+      <jenkinsTunnel>10.105.128.160:50000</jenkinsTunnel>
+      <credentialsId>c2f50478-fa0e-44ea-a24e-56f5c6308e63</credentialsId>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
       <connectTimeout>0</connectTimeout>
