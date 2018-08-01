@@ -1,6 +1,6 @@
 FROM jenkins/jenkins:lts as jenkins-plugins
 
-ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=300"
 ENV CURL_CONNECTION_TIMEOUT=30
 ENV CURL_RETRY=2
 USER root
