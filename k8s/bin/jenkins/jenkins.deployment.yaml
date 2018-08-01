@@ -74,6 +74,9 @@ spec:
       containers:
       - name: jenkins
         image: amitkshirsagar13/jenkins-k8s:latest
+        env:
+          - name: ARGS_CUSTOM
+            value: CUSTOM_ARGS
         ports:
           - name: http-port
             containerPort: 8080
