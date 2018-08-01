@@ -49,7 +49,7 @@
           <alwaysPullImage>false</alwaysPullImage>
           <instanceCap>2</instanceCap>
           <slaveConnectTimeout>36000</slaveConnectTimeout>
-          <idleMinutes>1440</idleMinutes>
+          <idleMinutes>20</idleMinutes>
           <activeDeadlineSeconds>3600</activeDeadlineSeconds>
           <label>jenkins-slave</label>
           <serviceAccount>jenkins:default</serviceAccount>
