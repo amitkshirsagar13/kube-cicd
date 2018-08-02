@@ -8,3 +8,4 @@ docker-plugin
 git
 github
 github-api
+ansicolor
