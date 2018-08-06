@@ -124,9 +124,17 @@ spec:
   tls:
   - hosts:
     - jenkins.gce.k8m.k8cluster.io
+    - jenkins.gce.k8n1.k8cluster.io
     secretName: jenkins-secret
   rules:
   - host: jenkins.gce.k8m.k8cluster.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jenkins-service
+          servicePort: 8080
+  - host: jenkins.gce.k8n1.k8cluster.io
     http:
       paths:
       - path: /

@@ -9,6 +9,9 @@ spec:
     - sechoserver.dev.gce.k8m.k8cluster.io
     - sechoserver.dev.gke.k8m.k8cluster.io
     - sechoserver.dev.mini.k8m.k8cluster.io
+    - sechoserver.dev.gce.k8n1.k8cluster.io
+    - sechoserver.dev.gke.k8n1.k8cluster.io
+    - sechoserver.dev.mini.k8n1.k8cluster.io
     secretName: dev-tls
   backend:
     serviceName: default-http-backend
@@ -29,6 +32,27 @@ spec:
               servicePort: 8080
             path: /
     - host: sechoserver.dev.mini.k8m.k8cluster.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: sechoserver.dev.gce.k8n1.k8cluster.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: sechoserver.dev.gke.k8n1.k8cluster.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: sechoserver.dev.mini.k8n1.k8cluster.io
       http:
         paths:
           - backend:

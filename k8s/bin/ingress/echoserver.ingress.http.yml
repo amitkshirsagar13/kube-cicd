@@ -33,3 +33,24 @@ spec:
               serviceName: echoserver
               servicePort: 8080
             path: /
+    - host: echoserver.dev.gce.k8n1.k8cluster.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: echoserver.dev.gke.k8n1.k8cluster.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+    - host: echoserver.dev.mini.k8n1.k8cluster.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
