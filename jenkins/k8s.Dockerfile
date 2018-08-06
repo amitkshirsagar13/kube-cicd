@@ -1,14 +1,6 @@
-FROM jenkins/jenkins:lts as jenkins-plugins
+FROM amitkshirsagar13/jenkins-k8s-plugins as jenkins-k8s
 
-ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=300"
-ENV CURL_CONNECTION_TIMEOUT=30
-ENV CURL_RETRY=2
 USER root
-
-COPY config/plugins/plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN cat /usr/share/jenkins/ref/plugins.txt | /usr/local/bin/install-plugins.sh 
-
-FROM jenkins-plugins as jenkins-master
 
 RUN mkdir -p /run/secrets
 COPY config/users/jenkins-user.yml /run/secrets/jenkins-user.yml
