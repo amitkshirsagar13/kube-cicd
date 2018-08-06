@@ -73,7 +73,7 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: amitkshirsagar13/jenkins-k8s:latest
+        image: amitkshirsagar13/jenkins-k8s-master:latest
         imagePullPolicy: Always
         env:
           - name: ARGS_CUSTOM
