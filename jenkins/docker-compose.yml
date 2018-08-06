@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jenkins-master
+    image: amitkshirsagar13/jenkins-k8s-master:latest
     container_name: jenkins
     user: root
     volumes:
