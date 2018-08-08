@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.121.1</version>
+  <version>2.121.2</version>
   <installStateName>RUNNING</installStateName>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
@@ -17,22 +17,7 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULL_NAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <jdks>
-    <jdk>
-      <name>jdk8</name>
-      <home></home>
-      <properties>
-        <hudson.tools.InstallSourceProperty>
-          <installers>
-            <hudson.tools.JDKInstaller plugin="jdk-tool@1.1">
-              <id>jdk-8u102-oth-JPR</id>
-              <acceptLicense>true</acceptLicense>
-            </hudson.tools.JDKInstaller>
-          </installers>
-        </hudson.tools.InstallSourceProperty>
-      </properties>
-    </jdk>
-  </jdks>
+  <jdks/>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
@@ -48,10 +33,10 @@
           <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
           <alwaysPullImage>false</alwaysPullImage>
           <instanceCap>2</instanceCap>
-          <slaveConnectTimeout>36000</slaveConnectTimeout>
-          <idleMinutes>20</idleMinutes>
-          <activeDeadlineSeconds>18000</activeDeadlineSeconds>
-          <label>jenkins-slave</label>
+          <slaveConnectTimeout>100</slaveConnectTimeout>
+          <idleMinutes>120</idleMinutes>
+          <activeDeadlineSeconds>0</activeDeadlineSeconds>
+          <label></label>
           <serviceAccount>jenkins:default</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
@@ -62,8 +47,8 @@
           <volumes/>
           <containers>
             <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
-              <name>jenkins-slave</name>
-              <image>amitkshirsagar13/jenkins-k8s-slave</image>
+              <name>jenkins-k8s-slave</name>
+              <image>jenkins/jnlp-slave</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
               <workingDir>/home/jenkins</workingDir>
@@ -91,21 +76,24 @@
           <imagePullSecrets/>
           <nodeProperties/>
           <yaml></yaml>
+          <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Always"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
       </templates>
-      <serverUrl>https://kubernetes.default.svc.cluster.local</serverUrl>
+      <serverUrl>https://192.168.1.123:6443</serverUrl>
       <skipTlsVerify>false</skipTlsVerify>
       <addMasterProxyEnvVars>false</addMasterProxyEnvVars>
       <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
       <namespace>jenkins</namespace>
-      <jenkinsUrl>http://jenkins.jenkins.svc.cluster.local:8080/</jenkinsUrl>
-      <jenkinsTunnel>jenkins.jenkins.svc.cluster.local:50000</jenkinsTunnel>
-      <credentialsId>c2f50478-fa0e-44ea-a24e-56f5c6308e63</credentialsId>
+      <jenkinsUrl>http://10.106.6.202:8080</jenkinsUrl>
+      <jenkinsTunnel>10.106.6.202:50000</jenkinsTunnel>
+      <credentialsId>84ed3887-14aa-4fdd-9b2d-966bf052169c</credentialsId>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
       <connectTimeout>0</connectTimeout>
       <readTimeout>0</readTimeout>
+      <usageRestricted>false</usageRestricted>
       <maxRequestsPerHost>32</maxRequestsPerHost>
+      <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Never"/>
     </org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud>
   </clouds>
   <quietPeriod>5</quietPeriod>
