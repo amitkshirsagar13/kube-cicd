@@ -9,4 +9,5 @@ RUN apk add --no-cache curl
 RUN pip install --upgrade pip
 RUN pip install pbr
 RUN pip install jenkins-job-builder
+RUN pip install jenkins-job-builder-pipeline
 RUN pip install jenkins-job-builder-multibranch-pipeline
