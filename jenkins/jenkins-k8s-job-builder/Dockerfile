@@ -1,5 +1,5 @@
 FROM alpine:3.3
-MAINTAINER Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
+LABEL maintainer="Amit Kshirsagar <amit.kshirsagar.13@gmail.com>"
 
 ENV VERSION 2.2.1
 
