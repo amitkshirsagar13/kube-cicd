@@ -9,7 +9,7 @@ COPY config/users/jenkins-user.json /run/secrets/jenkins-user.json
 
 # This might cause failure while mounting jenkins_home from hostPath
 COPY config/config.xml /var/jenkins_home/config.xml
-COPY config/config.xml /var/jenkins_home/config.xml
+COPY config/scriptApproval.xml /var/jenkins_home/scriptApproval.xml
 
 RUN mkdir -p /var/lib/jenkins/init.groovy.d
 COPY config/users/security.simple.groovy /usr/share/jenkins/ref/init.groovy.d/security.simple.groovy
