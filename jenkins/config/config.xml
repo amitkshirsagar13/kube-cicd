@@ -84,8 +84,8 @@
       <addMasterProxyEnvVars>false</addMasterProxyEnvVars>
       <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
       <namespace>jenkins</namespace>
-      <jenkinsUrl>http://10.106.6.202:8080</jenkinsUrl>
-      <jenkinsTunnel>10.106.6.202:50000</jenkinsTunnel>
+      <jenkinsUrl>http://jenkins-service.jenkins.svc.cluster.local:8080</jenkinsUrl>
+      <jenkinsTunnel>jenkins-service.jenkins.svc.cluster.local:50000</jenkinsTunnel>
       <credentialsId>84ed3887-14aa-4fdd-9b2d-966bf052169c</credentialsId>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
