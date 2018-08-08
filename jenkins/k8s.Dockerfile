@@ -1,4 +1,5 @@
 FROM amitkshirsagar13/jenkins-k8s-plugins as jenkins-k8s
+MAINTAINER Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
 
 USER root
 

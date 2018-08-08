@@ -1,4 +1,5 @@
 FROM jenkins/jenkins:lts as jenkins-k8s-plugins
+MAINTAINER Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
 
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=300"
 ENV CURL_CONNECTION_TIMEOUT=30

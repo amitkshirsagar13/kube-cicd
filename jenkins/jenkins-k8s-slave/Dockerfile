@@ -1,4 +1,5 @@
 FROM jenkins/jnlp-slave
+MAINTAINER Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
 
 USER root
 RUN apt install -y curl

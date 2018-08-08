@@ -88,9 +88,16 @@ spec:
         volumeMounts:
           - name: jenkins-home
             mountPath: /var/jenkins_home
+          - name: docker-socket
+            mountPath: /var/run/docker.sock
       volumes:
+        - name: docker-socket
+          defaultMode: 0555
+          hostPath:
+            path: /var/run/docker.sock
         - name: jenkins-home
-          emptyDir: {}
+          hostPath:
+            path: /data/jenkins_home
 ---
 apiVersion: v1
 kind: Service
