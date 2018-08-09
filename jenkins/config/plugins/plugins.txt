@@ -9,3 +9,5 @@ git
 github
 github-api
 ansicolor
+view-job-filters
+build-pipeline-plugin
