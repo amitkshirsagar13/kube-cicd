@@ -1,5 +1,5 @@
 workflow-multibranch
-kubernetes
+kubernetes:1.12.2
 credentials-binding
 pipeline-maven
 workflow-job
