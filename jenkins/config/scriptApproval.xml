@@ -1,8 +1,22 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <scriptApproval plugin="script-security@1.44">
-  <approvedScriptHashes/>
+  <approvedScriptHashes>
+    <string>017d0db438428731cd600b6ebda805065433520f</string>
+    <string>27f334e6125c3ee717e83bc27650e61617073908</string>
+  </approvedScriptHashes>
   <approvedSignatures>
+    <string>method com.google.inject.Injector getInstance java.lang.Class</string>
+    <string>method hudson.model.Saveable save</string>
+    <string>method hudson.security.FullControlOnceLoggedInAuthorizationStrategy setAllowAnonymousRead boolean</string>
+    <string>method hudson.security.HudsonPrivateSecurityRealm createAccount java.lang.String java.lang.String</string>
+    <string>method jenkins.model.Jenkins getInjector</string>
+    <string>method jenkins.model.Jenkins setAuthorizationStrategy hudson.security.AuthorizationStrategy</string>
+    <string>method jenkins.model.Jenkins setSecurityRealm hudson.security.SecurityRealm</string>
+    <string>method jenkins.security.s2m.AdminWhitelistRule setMasterKillSwitch boolean</string>
     <string>method org.jenkinsci.plugins.workflow.support.actions.EnvironmentAction getEnvironment</string>
+    <string>new hudson.security.FullControlOnceLoggedInAuthorizationStrategy</string>
+    <string>new hudson.security.HudsonPrivateSecurityRealm boolean</string>
+    <string>staticMethod jenkins.model.Jenkins getInstance</string>
     <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getAt java.lang.Object java.lang.String</string>
   </approvedSignatures>
   <aclApprovedSignatures/>
