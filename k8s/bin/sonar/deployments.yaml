@@ -127,16 +127,13 @@ spec:
            mountPath: /opt/sonarqube/extensions
          - name: sonarqube-data
            mountPath: /opt/sonarqube/data
-      volumes:
+      volumes:nfs
       - name: sonarqube-extensions
-        nfs:
-          server: ""
-          path: "/sonarqube/extensions"
-          readOnly: false
+        hostPath:
+          path: "/data/sonarqube/extensions"
       - name: sonarqube-data
-        nfs:
-          server: ""
-          path: "/sonarqube/data"
+        hostPath:
+          path: "/data/sonarqube/data"
           readOnly: false
 ---
 apiVersion: v1
@@ -165,14 +162,22 @@ metadata:
 spec:
   tls:
   - hosts:
-    - jenkins.gce.k8m.k8cluster.io
-    - jenkins.gce.k8n1.k8cluster.io
-    secretName: jenkins-secret
+    - sonar.gce.k8m.k8cluster.io
+    - sonar.gce.k8n1.k8cluster.io
+    secretName: sonar-secret
   rules:
-  - host: sonar.ingress.forkedprocess.com
+  - host: sonar.gce.k8m.k8cluster.io
     http:
       paths:
       - path: /
         backend:
           serviceName: sonar
           servicePort: 80
+  - host: sonar.gce.k8n1.k8cluster.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sonar
+          servicePort: 80
+          
