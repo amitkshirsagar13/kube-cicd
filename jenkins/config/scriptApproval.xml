@@ -1,7 +1,9 @@
 <?xml version='1.1' encoding='UTF-8'?>
-<scriptApproval plugin="script-security@1.44">
+<scriptApproval plugin="script-security@1.46">
   <approvedScriptHashes/>
   <approvedSignatures>
+    <string>method com.cloudbees.plugins.credentials.CredentialsStore addCredentials com.cloudbees.plugins.credentials.domains.Domain com.cloudbees.plugins.credentials.Credentials</string>
+    <string>method com.cloudbees.plugins.credentials.SystemCredentialsProvider getStore</string>
     <string>method com.google.inject.Injector getInstance java.lang.Class</string>
     <string>method groovy.json.JsonSlurperClassic parseText java.lang.String</string>
     <string>method hudson.model.Saveable save</string>
@@ -11,11 +13,17 @@
     <string>method jenkins.model.Jenkins setSecurityRealm hudson.security.SecurityRealm</string>
     <string>method jenkins.security.s2m.AdminWhitelistRule setMasterKillSwitch boolean</string>
     <string>method org.jenkinsci.plugins.workflow.support.actions.EnvironmentAction getEnvironment</string>
+    <string>new com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl com.cloudbees.plugins.credentials.CredentialsScope java.lang.String java.lang.String java.lang.String java.lang.String</string>
     <string>new groovy.json.JsonSlurperClassic</string>
     <string>new hudson.security.FullControlOnceLoggedInAuthorizationStrategy</string>
     <string>new hudson.security.HudsonPrivateSecurityRealm boolean</string>
+    <string>new java.io.File java.lang.String</string>
+    <string>staticField com.cloudbees.plugins.credentials.CredentialsScope GLOBAL</string>
+    <string>staticMethod com.cloudbees.plugins.credentials.SystemCredentialsProvider getInstance</string>
+    <string>staticMethod com.cloudbees.plugins.credentials.domains.Domain global</string>
     <string>staticMethod jenkins.model.Jenkins getInstance</string>
     <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getAt java.lang.Object java.lang.String</string>
+    <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getText java.io.File</string>
     <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getText java.net.URL</string>
     <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods println groovy.lang.Closure java.lang.Object</string>
   </approvedSignatures>
