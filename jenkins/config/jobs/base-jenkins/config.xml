@@ -1,5 +1,5 @@
 <?xml version='1.1' encoding='UTF-8'?>
-<flow-definition plugin="workflow-job@2.24">
+<flow-definition plugin="workflow-job@2.25">
   <actions/>
   <description>Setup Jenkins Environment as per requirement</description>
   <keepDependencies>false</keepDependencies>
@@ -13,19 +13,82 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
   </properties>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.54">
-    <script>node {
-    def config = &quot;https://raw.githubusercontent.com/amitkshirsagar13/kube-cicd/master/jenkins/config/config.xml&quot;
-    def scriptApproval = &quot;https://raw.githubusercontent.com/amitkshirsagar13/kube-cicd/master/jenkins/config/scriptApproval.xml&quot;
-    def url = &quot;http://10.106.6.202:8080/safeRestart&quot;
-        
-   sh &quot;&quot;&quot;
-        
-        curl -s -o /var/jenkins_home/config.xml &quot;${config}&quot;
-        curl -s -o /var/jenkins_home/scriptApproval.xml &quot;${scriptApproval}&quot;
-        
-        curl -s -X POST &quot;${url}&quot; --user &quot;admin:admin&quot;
-   &quot;&quot;&quot;
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.55">
+    <script>import jenkins.model.*
+import hudson.security.*
+import com.cloudbees.plugins.credentials.impl.*;
+import com.cloudbees.plugins.credentials.*;
+import com.cloudbees.plugins.credentials.domains.*;
+import jenkins.security.s2m.AdminWhitelistRule
+import groovy.json.JsonSlurperClassic
+import com.cloudbees.groovy.cps.NonCPS
+@NonCPS
+def updateUsers(){
+    def instance = Jenkins.getInstance()
+
+        def jsonUserList = new File(&apos;/run/secrets/jenkins-user.json&apos;)
+        def userList = new JsonSlurperClassic().parseText(jsonUserList.text)
+        def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+        userList.users.each{
+                def user = it.user.name
+                def pass = it.user.password
+                println &quot;Creating user &quot; + user + &quot;...&quot;
+                hudsonRealm.createAccount(user, pass)
+                println &quot;Security User &quot; + user        + &quot; was created&quot;
+        }
+        instance.setSecurityRealm(hudsonRealm)
+
+
+        def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+        instance.setAuthorizationStrategy(strategy)
+        instance.save()
+
+        Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class).setMasterKillSwitch(false)
+
+}
+
+
+@NonCPS
+def updateCredential(){
+
+        def onlineCredentialList = new File(&apos;/run/secrets/jenkins-credentials.json&apos;)
+    def credentialList = new JsonSlurperClassic().parseText(onlineCredentialList.text)
+
+    credentialList.credentials.each{
+        def id = it.credential.id
+        def user = it.credential.user
+        def pass = it.credential.password
+        def description = it.credential.description
+
+        println &quot;Creating credential &quot; + user + &quot;...&quot;
+        Credentials creds = (Credentials) new UsernamePasswordCredentialsImpl(CredentialsScope.GLOBAL,id, description, user, pass)
+
+        SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), creds)
+        println &quot;Credential &quot; + user   + &quot; was created&quot;
+    }
+}
+
+node {
+
+        def config = &quot;https://raw.githubusercontent.com/amitkshirsagar13/kube-cicd/master/jenkins/config/config.xml&quot;
+        def scriptApproval = &quot;https://raw.githubusercontent.com/amitkshirsagar13/kube-cicd/master/jenkins/config/scriptApproval.xml&quot;
+        def url = &quot;http://localhost:8080/safeRestart&quot;
+        def onlineUserList = &quot;https://raw.githubusercontent.com/amitkshirsagar13/kube-cicd/master/jenkins/config/users/jenkins-user.json&quot;
+        def onlineCredentialList = &quot;https://raw.githubusercontent.com/amitkshirsagar13/kube-cicd/master/jenkins/config/credentials/jenkins-creds.json&quot;
+
+        sh &quot;&quot;&quot;
+                curl -s -o /var/jenkins_home/config.xml &quot;${config}&quot;
+                curl -s -o /var/jenkins_home/scriptApproval.xml &quot;${scriptApproval}&quot;
+                curl -s -o /run/secrets/jenkins-user.json &quot;${onlineUserList}&quot;
+                curl -s -o /run/secrets/jenkins-credentials.json &quot;${onlineCredentialList}&quot;
+        &quot;&quot;&quot;
+        updateUsers()
+        updateCredential()
+
+
+        sh &quot;&quot;&quot;
+                curl -s -X POST &quot;${url}&quot; --user &quot;admin:admin&quot;
+        &quot;&quot;&quot;
 }</script>
     <sandbox>true</sandbox>
   </definition>
