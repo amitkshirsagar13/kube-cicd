@@ -101,11 +101,11 @@ spec:
           - name: jnlp-port
             containerPort: 50000
         volumeMounts:
-          - name: jenkins-home
-            mountPath: /var/jenkins_home
           - name: docker-socket
             readOnly: true
             mountPath: /var/run/docker.sock
+          #- name: jenkins-home
+          #  mountPath: /var/jenkins_home
       volumes:
         - name: docker-socket
           hostPath:
