@@ -88,7 +88,7 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: amitkshirsagar13/jenkins-k8s-master:latest
+        image: jenkins/jenkins:latest
         imagePullPolicy: Always
         env:
           - name: JAVA_OPTS

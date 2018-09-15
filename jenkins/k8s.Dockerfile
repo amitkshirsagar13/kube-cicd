@@ -9,7 +9,8 @@ COPY config/users/jenkins-user.json /run/secrets/jenkins-user.json
 
 # This might cause failure while mounting jenkins_home from hostPath
 COPY config/config.xml /var/jenkins_home/config.xml
-COPY config/scriptApproval.xml /var/jenkins_home/scriptApproval.xmlx
+COPY config/scriptApproval.xml /var/jenkins_home/scriptApproval.xml
+COPY config/jobs /var/jenkins_home/jobs
 
 RUN mkdir -p /var/lib/jenkins/init.groovy.d
 COPY config/users/security.simple.groovy /usr/share/jenkins/ref/init.groovy.d/security.simple.groovy
@@ -22,7 +23,6 @@ COPY config/kubernetes/kubernetes.groovy /usr/share/jenkins/ref/init.groovy.d/ku
 RUN chmod 777 -R /run/secrets
 RUN chmod 777 -R /var/jenkins_home
 USER jenkins
-COPY config/jobs /var/jenkins_home/jobs
 
 
-# docker build -t amitkshirsagar13/jenkins-k8s .
+# docker build -t amitkshirsagar13/jenkins-k8s-master .
