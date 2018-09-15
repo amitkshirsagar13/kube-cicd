@@ -1,4 +1,4 @@
-FROM amitkshirsagar13/jenkins-k8s-plugins as jenkins-k8s
+FROM amitkshirsagar13/jenkins-k8s-plugins
 LABEL maintainer="Amit Kshirsagar <amit.kshirsagar.13@gmail.com>"
 
 USER root

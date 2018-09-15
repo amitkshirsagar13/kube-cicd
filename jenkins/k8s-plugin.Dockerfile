@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts-alpine as jenkins-k8s-plugins
+FROM jenkins/jenkins:lts-alpine
 LABEL maintainer="Amit Kshirsagar <amit.kshirsagar.13@gmail.com>"
 
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=300"
