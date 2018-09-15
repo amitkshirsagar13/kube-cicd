@@ -8,8 +8,8 @@ COPY config/users/jenkins-user.yml /run/secrets/jenkins-user.yml
 COPY config/users/jenkins-user.json /run/secrets/jenkins-user.json
 
 # This might cause failure while mounting jenkins_home from hostPath
-COPY config/config.xml /run/secrets/config.xml
-COPY config/scriptApproval.xml /run/secrets/scriptApproval.xml
+COPY config/config.xml /var/jenkins_home/config.xml
+COPY config/scriptApproval.xml /var/jenkins_home/scriptApproval.xml
 COPY config/jobs /var/jenkins_home/jobs
 
 RUN mkdir -p /var/lib/jenkins/init.groovy.d
