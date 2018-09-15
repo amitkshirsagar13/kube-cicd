@@ -14,8 +14,8 @@ COPY config/jobs /var/jenkins_home/jobs
 
 RUN mkdir -p /var/lib/jenkins/init.groovy.d
 COPY config/users/security.simple.groovy /usr/share/jenkins/ref/init.groovy.d/security.simple.groovy
-COPY config/users/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy 
-COPY config/credentials/credentials.groovy /usr/share/jenkins/ref/init.groovy.d/credentials.groovy 
+#COPY config/users/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy 
+#COPY config/credentials/credentials.groovy /usr/share/jenkins/ref/init.groovy.d/credentials.groovy 
 COPY config/global-tools/jdk-global-tools.groovy /usr/share/jenkins/ref/init.groovy.d/jdk-global-tools.groovy 
 COPY config/global-tools/maven-global-tools.groovy /usr/share/jenkins/ref/init.groovy.d/maven-global-tools.groovy 
 COPY config/kubernetes/kubernetes.groovy /usr/share/jenkins/ref/init.groovy.d/kubernetes.groovy 
