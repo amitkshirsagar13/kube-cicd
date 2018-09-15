@@ -91,6 +91,8 @@ spec:
         image: amitkshirsagar13/jenkins-k8s-master:latest
         imagePullPolicy: Always
         env:
+          - name: JAVA_OPTS
+            value: -Djenkins.install.runSetupWizard=false
           - name: ARGS_CUSTOM
             value: CUSTOM_ARGS
         ports:
