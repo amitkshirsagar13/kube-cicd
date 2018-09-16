@@ -48,7 +48,7 @@
           <containers>
             <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
               <name>jenkins-k8s-slave</name>
-              <image>jenkins/jnlp-slave</image>
+              <image>amitkshirsagar13/jenkins-k8s-slave</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
               <workingDir>/home/jenkins</workingDir>
