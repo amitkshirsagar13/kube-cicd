@@ -42,7 +42,7 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>https://github.com/amitkshirsagar13/base-pipeline.git</url>
+          <url>https://github.com/amitkshirsagar13/kube-jobs-pipeline.git</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
