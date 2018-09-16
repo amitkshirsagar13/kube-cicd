@@ -15,6 +15,12 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
+          <name>GIT_REPOSITORY</name>
+          <description>GitHub Repository</description>
+          <defaultValue>amitkshirsagar13</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>GIT_PROJECT_NAME</name>
           <description>GitHub Project Repository location to be used for k8s-cicd</description>
           <defaultValue>kube-cicd</defaultValue>
@@ -78,14 +84,15 @@ def updateCredential(){
 
 node {
         def gitProjectName = env.GIT_PROJECT_NAME
+        def repository = env.GIT_REPOSITORY
 
         println &quot;Using Git Project Name: &quot; + gitProjectName
 
-        def config = &quot;https://raw.githubusercontent.com/amitkshirsagar13/${gitProjectName}/master/jenkins/config/config.xml&quot;
-        def scriptApproval = &quot;https://raw.githubusercontent.com/amitkshirsagar13/${gitProjectName}/master/jenkins/config/scriptApproval.xml&quot;
+        def config = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/config.xml&quot;
+        def scriptApproval = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/scriptApproval.xml&quot;
         def url = &quot;http://localhost:8080/safeRestart&quot;
-        def onlineUserList = &quot;https://raw.githubusercontent.com/amitkshirsagar13/${gitProjectName}/master/jenkins/config/users/jenkins-user.json&quot;
-        def onlineCredentialList = &quot;https://raw.githubusercontent.com/${gitProjectName}/kube-cicd/master/jenkins/config/credentials/jenkins-creds.json&quot;
+        def onlineUserList = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/users/jenkins-user.json&quot;
+        def onlineCredentialList = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/credentials/jenkins-creds.json&quot;
 
         sh &quot;&quot;&quot;
             curl -s -o /var/jenkins_home/config.xml &quot;${config}&quot;
