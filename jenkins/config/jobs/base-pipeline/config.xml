@@ -22,6 +22,18 @@
           <defaultValue>yes</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>git-repository</name>
+          <description>Git Repository to fetch pipeline information</description>
+          <defaultValue>amitkshirsagar13</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>target-environment</name>
+          <description>Target Environment to use for default values for pipeline build</description>
+          <defaultValue>DEV</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
