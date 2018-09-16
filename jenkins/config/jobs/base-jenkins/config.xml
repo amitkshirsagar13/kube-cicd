@@ -17,7 +17,7 @@
         <hudson.model.StringParameterDefinition>
           <name>GIT_PROJECT_NAME</name>
           <description>GitHub Project Repository location to be used for k8s-cicd</description>
-          <defaultValue>EngagementHUB</defaultValue>
+          <defaultValue>kube-cicd</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
