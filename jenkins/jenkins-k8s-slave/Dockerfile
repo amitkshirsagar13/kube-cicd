@@ -1,4 +1,4 @@
-FROM jenkins/jnlp-slave
+FROM jenkins/jnlp-slave:alpine
 LABEL maintainer="Amit Kshirsagar <amit.kshirsagar.13@gmail.com>"
 
 USER root
