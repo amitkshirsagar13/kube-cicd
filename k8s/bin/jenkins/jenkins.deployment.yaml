@@ -108,7 +108,7 @@ spec:
             readOnly: true
             mountPath: /var/run/docker.sock
           - name: jenkins-home
-           mountPath: /var/jenkins_home
+            mountPath: /var/jenkins_home
       volumes:
         - name: docker-socket
           hostPath:
