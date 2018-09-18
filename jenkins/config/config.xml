@@ -33,7 +33,7 @@
           <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
           <alwaysPullImage>false</alwaysPullImage>
           <instanceCap>2</instanceCap>
-          <slaveConnectTimeout>100</slaveConnectTimeout>
+          <slaveConnectTimeout>10000</slaveConnectTimeout>
           <idleMinutes>120</idleMinutes>
           <activeDeadlineSeconds>0</activeDeadlineSeconds>
           <label></label>
