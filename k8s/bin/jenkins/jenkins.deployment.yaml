@@ -17,7 +17,7 @@ data:
     [jenkins]
     user=admin
     password=admin
-    url=http://10.106.6.202:8080
+    url=http://jenkins-service.jenkins.svc.cluster.local:8080
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
