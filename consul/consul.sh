@@ -7,4 +7,5 @@ docker run -d --rm --name=dev-consul-agent2 -e CONSUL_BIND_INTERFACE=eth0 consul
 
 
 
+dig @172.17.0.2 -p 8600 school-service.service.consul. A
 dig @172.17.0.2 -p 8600 school-service.service.dc1.consul. ANY
