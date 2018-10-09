@@ -93,12 +93,13 @@ node {
         def url = &quot;http://localhost:8080/safeRestart&quot;
         def onlineUserList = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/users/jenkins-user.json&quot;
         def onlineCredentialList = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/credentials/jenkins-creds.json&quot;
-
+        def veracoreplugin = &quot;https://raw.githubusercontent.com/${repository}/${gitProjectName}/master/jenkins/config/plugins/veracode-jenkins-plugin.hpi&quot;
         sh &quot;&quot;&quot;
             curl -s -o /var/jenkins_home/config.xml &quot;${config}&quot;
             curl -s -o /var/jenkins_home/scriptApproval.xml &quot;${scriptApproval}&quot;
             curl -s -o /run/secrets/jenkins-user.json &quot;${onlineUserList}&quot;
             curl -s -o /run/secrets/jenkins-credentials.json &quot;${onlineCredentialList}&quot;
+            curl -s -o /var/jenkins_home/plugins/veracode-jenkins-plugin.hpi &quot;${veracoreplugin}&quot;
         &quot;&quot;&quot;
         updateUsers()
         updateCredential()
