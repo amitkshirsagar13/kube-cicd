@@ -1,0 +1,17 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<com.veracode.jenkins.plugin.VeracodeNotifier_-VeracodeDescriptor plugin="veracode-jenkins-plugin@18.5.5.7">
+  <gvapicredential></gvapicredential>
+  <gvuser></gvuser>
+  <gvpassword></gvpassword>
+  <failbuild>true</failbuild>
+  <copyremotefiles>false</copyremotefiles>
+  <autoappname>false</autoappname>
+  <autodescription>false</autodescription>
+  <autoversion>false</autoversion>
+  <debug>false</debug>
+  <proxy>false</proxy>
+  <phost>{AQAAABAAAAAQuPj8EbGEIKbBy6Tna7b32j6EFYLz+qgvQZ8MfiA7p9w=}</phost>
+  <pport>{AQAAABAAAAAQAM16pzgC2cxfbgf7Pd53QQZvtOMfsZil07a5MT4fHYA=}</pport>
+  <puser></puser>
+  <ppassword></ppassword>
+</com.veracode.jenkins.plugin.VeracodeNotifier_-VeracodeDescriptor>
