@@ -7,14 +7,25 @@ metadata:
 data:
   fluent_conf: |
     @include kubernetes.conf
-
-    <match **>
+    <match fluent.**>
+      @type null
+    </match>
+    
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+    </filter>
+    
+    <match kubernetes.var.log.containers.**fluentd**.log>
+      @type null
+    </match>
+    
+    <match kubernetes.**>
       @type kafka_buffered
 
       brokers               kafka-host:9092
 
-      topic_key             your-logs-topic
-      default_topic         your-logs-topic
+      topic_key             kubernetes_logs
+      default_topic         kubernetes_logs
       output_data_type      json
       output_include_tag    true
       output_include_time   true
