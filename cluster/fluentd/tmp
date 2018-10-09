@@ -1,0 +1,28 @@
+@include kubernetes.conf
+    <match fluent.**>
+      @type null
+    </match>
+    
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+    </filter>
+    
+    <match kubernetes.var.log.containers.**fluentd**.log>
+      @type null
+    </match>
+    
+    <match kubernetes.**>
+      @type kafka_buffered
+
+      brokers               192.168.1.111:9092
+
+      topic_key             kubernetes_logs
+      default_topic         kubernetes_logs
+      output_data_type      json
+      output_include_tag    true
+      output_include_time   true
+      get_kafka_client_log  false
+
+      required_acks         1
+      compression_codec     gzip
+    </match>

@@ -37,6 +37,10 @@ data:
       @type null
     </match>
     
+    <match kubernetes.var.log.containers.**kube-system**.log>
+      @type null
+    </match>
+    
     <match kubernetes.**>
       @type kafka_buffered
 
