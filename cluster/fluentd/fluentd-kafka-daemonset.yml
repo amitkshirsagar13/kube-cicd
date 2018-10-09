@@ -22,7 +22,7 @@ data:
     <match kubernetes.**>
       @type kafka_buffered
 
-      brokers               kafka-host:9092
+      brokers               192.168.1.111:9092
 
       topic_key             kubernetes_logs
       default_topic         kubernetes_logs
