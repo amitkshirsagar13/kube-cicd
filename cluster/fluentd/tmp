@@ -1,13 +1,18 @@
-@include kubernetes.conf
+
+    @include kubernetes.conf
     <match fluent.**>
       @type null
     </match>
-    
+
     <filter kubernetes.**>
       @type kubernetes_metadata
     </filter>
     
     <match kubernetes.var.log.containers.**fluentd**.log>
+      @type null
+    </match>
+
+    <match kubernetes.var.log.containers.**kube-system**.log>
       @type null
     </match>
     
@@ -22,7 +27,7 @@
       output_include_tag    true
       output_include_time   true
       get_kafka_client_log  false
-
+      flush_interval        60s
       required_acks         1
       compression_codec     gzip
     </match>

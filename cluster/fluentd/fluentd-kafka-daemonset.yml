@@ -28,20 +28,17 @@ data:
     <match fluent.**>
       @type null
     </match>
-    
-    <filter kubernetes.**>
-      @type kubernetes_metadata
-    </filter>
-    
-    <match kubernetes.var.log.containers.**fluentd**.log>
+
+    <match kubernetes.**fluentd**>
       @type null
     </match>
 
-    <match kubernetes.var.log.containers.**kube-system**.log>
+    <match kubernetes.**system**>
       @type null
     </match>
     
-    <match kubernetes.var.log.containers.**>
+    
+    <match kubernetes.**>
       @type kafka_buffered
 
       brokers               192.168.1.111:9092
