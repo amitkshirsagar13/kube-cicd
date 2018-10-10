@@ -3,7 +3,7 @@
     <match fluent.**>
       @type null
     </match>
-
+    
     <filter kubernetes.**>
       @type kubernetes_metadata
     </filter>
@@ -16,7 +16,7 @@
       @type null
     </match>
     
-    <match kubernetes.**>
+    <match kubernetes.var.log.containers.**>
       @type kafka_buffered
 
       brokers               192.168.1.111:9092
