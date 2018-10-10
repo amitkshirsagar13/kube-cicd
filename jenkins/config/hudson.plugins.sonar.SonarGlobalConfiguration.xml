@@ -2,8 +2,8 @@
 <hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.8.1">
   <installations>
     <hudson.plugins.sonar.SonarInstallation>
-      <name>SonarQubePIF</name>
-      <serverUrl>https://sonar-qube.dev.pif.glblclouddev.ad.pwcinternal.com</serverUrl>
+      <name>SonarQube</name>
+      <serverUrl>https://sonar-qube.gce.k8n1.k8cluster.io</serverUrl>
       <serverAuthenticationToken>{AQAAABAAAAAQV6Cj1S1XhRtLrzL1233jdM3srf1lm9KPe1EV7K3bO4I=}</serverAuthenticationToken>
       <mojoVersion></mojoVersion>
       <additionalProperties></additionalProperties>
