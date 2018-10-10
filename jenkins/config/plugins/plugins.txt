@@ -11,3 +11,4 @@ github-api
 ansicolor
 view-job-filters
 build-pipeline-plugin
+sonar:2.89.4
