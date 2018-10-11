@@ -107,8 +107,15 @@ spec:
           - name: docker-socket
             readOnly: true
             mountPath: /var/run/docker.sock
-          # - name: jenkins-home
-          #   mountPath: /var/jenkins_home
+          - name: jenkins-home
+            mountPath: /var/jenkins_home
+      initContainers:
+        - name: 
+          image: 
+          command: ["cp","-nR","/run/jenkins_home","/data/"]
+          volumeMounts:
+            - name: test
+              mountPath: /data
       volumes:
         - name: docker-socket
           hostPath:
@@ -116,6 +123,9 @@ spec:
         - name: jenkins-home
           hostPath:
             path: /data/jenkins_home
+        - name: data
+          hostPath:
+            path: /data
 ---
 apiVersion: v1
 kind: Service
