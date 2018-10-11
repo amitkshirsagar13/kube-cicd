@@ -7,7 +7,7 @@
         <hudson.tools.InstallSourceProperty>
           <installers>
             <hudson.plugins.sonar.MsBuildSonarQubeRunnerInstaller>
-              <id>4.4.0.1504</id>
+              <id>4.4.1.1530</id>
             </hudson.plugins.sonar.MsBuildSonarQubeRunnerInstaller>
           </installers>
         </hudson.tools.InstallSourceProperty>
