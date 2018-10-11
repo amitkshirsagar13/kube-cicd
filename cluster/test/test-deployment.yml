@@ -1,0 +1,88 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: test
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      imagePullSecrets:
+      - name: regsecret
+      nodeSelector:
+        cicd: shared
+      containers:
+      - name: echoserver
+        image: gcr.io/google_containers/echoserver:1.4
+        ports:
+        - name: echo
+          containerPort: 8080
+        volumeMounts:
+          - name: test
+            mountPath: /data/echo
+      - name: default-http-backend
+        # Any image is permissable as long as:
+        # 1. It serves a 404 page at /
+        # 2. It serves 200 on a /healthz endpoint
+        image: gcr.io/google_containers/defaultbackend:1.0
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        ports:
+        - name: backend
+          containerPort: 8080
+        volumeMounts:
+          - name: test
+            mountPath: /data/back
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+      initContainers:
+        - name: init
+          image: amitkshirsagar13/k8s-init-container
+          command: ["/run/sample/initScript.sh"]
+          volumeMounts:
+            - name: test
+              mountPath: /data/init
+      volumes:
+        - name: test
+          hostPath:
+            path: /data/test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service
+  namespace: test
+spec:
+  ports:
+  - port: 8080
+    targetPort: echo
+    protocol: TCP
+    name: http
+  - port: 8081
+    targetPort: backend
+    protocol: TCP
+    name: http
+  selector:
+    app: test
