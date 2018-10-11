@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.121.2</version>
+  <version>2.138.2</version>
   <installStateName>RUNNING</installStateName>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
@@ -21,7 +21,7 @@
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@1.12.0">
+    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@1.12.2">
       <name>kubernetes</name>
       <defaultsProviderTemplate></defaultsProviderTemplate>
       <templates>
@@ -47,8 +47,8 @@
           <volumes/>
           <containers>
             <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
-              <name>jenkins-k8s-slave</name>
-              <image>amitkshirsagar13/jenkins-k8s-slave</image>
+              <name>k8s-jenkins-slave</name>
+              <image>amitkshirsagar13/k8s-jenkins-slave</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
               <workingDir>/home/jenkins</workingDir>
@@ -86,7 +86,6 @@
       <namespace>jenkins</namespace>
       <jenkinsUrl>http://jenkins-service.jenkins.svc.cluster.local:8080</jenkinsUrl>
       <jenkinsTunnel>jenkins-service.jenkins.svc.cluster.local:50000</jenkinsTunnel>
-      <credentialsId>84ed3887-14aa-4fdd-9b2d-966bf052169c</credentialsId>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
       <connectTimeout>0</connectTimeout>
