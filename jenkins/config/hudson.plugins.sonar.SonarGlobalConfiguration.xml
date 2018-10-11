@@ -3,8 +3,8 @@
   <installations>
     <hudson.plugins.sonar.SonarInstallation>
       <name>SonarQube</name>
-      <serverUrl>https://sonar-qube.gce.k8n1.k8cluster.io</serverUrl>
-      <serverAuthenticationToken>{AQAAABAAAAAQV6Cj1S1XhRtLrzL1233jdM3srf1lm9KPe1EV7K3bO4I=}</serverAuthenticationToken>
+      <serverUrl>https://sonarqube.gce.k8n1.k8cluster.io</serverUrl>
+      <serverAuthenticationToken>{AQAAABAAAAAQoEDbujvpv7O4Rv4liTqjOPimQAkE5gErWCxbBeIGkqs=}</serverAuthenticationToken>
       <mojoVersion></mojoVersion>
       <additionalProperties></additionalProperties>
       <additionalAnalysisProperties></additionalAnalysisProperties>
