@@ -7,6 +7,8 @@ docker build -t amitkshirsagar13/k8s-jenkins-alpine . -f k8s-jenkins-alpine/Dock
 docker build -t amitkshirsagar13/k8s-jenkins-job-builder . -f k8s-jenkins-job-builder/Dockerfile
 docker build -t amitkshirsagar13/k8s-jenkins-kubernetes . -f k8s-jenkins-kubernetes/Dockerfile
 
+docker build -t amitkshirsagar13/k8s-jenkins-master-init . -f k8s-jenkins-master-init/Dockerfile
+
 docker push amitkshirsagar13/k8s-jenkins-plugin
 docker push amitkshirsagar13/k8s-jenkins-master
 docker push amitkshirsagar13/k8s-jenkins-slave
