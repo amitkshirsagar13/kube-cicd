@@ -1,4 +1,4 @@
-FROM busybox
+FROM alpine
 LABEL maintainer="Amit Kshirsagar <amit.kshirsagar.13@gmail.com>"
 
 RUN mkdir -p /run/jenkins_home
