@@ -57,7 +57,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/jenkins"
+    path: "/data/m2/repository"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -112,7 +112,7 @@ spec:
       initContainers:
         - name: init-jenkins
           image: amitkshirsagar13/k8s-jenkins-master-init:latest
-          command: ["cp","-nR","/run/jenkins_home","/data/"]
+          command: ["cp","-uR","/run/jenkins_home","/data/"]
           volumeMounts:
             - name: data
               mountPath: /data
