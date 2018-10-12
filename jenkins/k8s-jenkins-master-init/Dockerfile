@@ -14,4 +14,4 @@ COPY --chown=root:root config/jenkins.model.JenkinsLocationConfiguration.xml /ru
 
 COPY --chown=root:root config/jobs /run/jenkins_home/jobs
 
-RUN chmod 777 -R /var/jenkins_home
+RUN chmod 777 -R /run/jenkins_home
