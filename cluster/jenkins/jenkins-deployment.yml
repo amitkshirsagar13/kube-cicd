@@ -111,7 +111,7 @@ spec:
             mountPath: /var/jenkins_home
       initContainers:
         - name: init-jenkins
-          image: amitkshirsagar13/k8s-jenkins-init-master:latest
+          image: amitkshirsagar13/k8s-jenkins-master-init:latest
           command: ["cp","-nR","/run/jenkins_home","/data/"]
           volumeMounts:
             - name: data
