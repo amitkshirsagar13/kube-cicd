@@ -114,7 +114,7 @@ spec:
           image: amitkshirsagar13/k8s-jenkins-init-master:latest
           command: ["cp","-nR","/run/jenkins_home","/data/"]
           volumeMounts:
-            - name: test
+            - name: data
               mountPath: /data
       volumes:
         - name: docker-socket
