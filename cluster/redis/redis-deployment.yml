@@ -7,8 +7,6 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: redis
   name: redis-service
   namespace: redis
 spec:
@@ -18,7 +16,8 @@ spec:
       port: 6379
       targetPort: 6379
   selector:
-    name: redis-service
+    app: redis
+# redis-service.redis.svc.cluster.local/redis-service.redis
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -34,12 +33,11 @@ data:
     dir /var/lib/redis
 ---
 apiVersion: apps/v1beta1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: redis
   namespace: redis
 spec:
-  serviceName: redis
   replicas: 1
   template:
     metadata:
@@ -47,6 +45,8 @@ spec:
         app: redis
     spec:
       terminationGracePeriodSeconds: 10
+      nodeSelector:
+        cicd: shared
       containers:
         - name: redis
           image: redis:3.2.0-alpine
