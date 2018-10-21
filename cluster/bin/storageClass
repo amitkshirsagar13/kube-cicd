@@ -1,0 +1,4 @@
+#!/bin/sh
+kubectl create -f storageClass.$1.yml
+kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+kubectl get storageclass

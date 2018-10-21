@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "InitContainers:"
+kubectl get pods -o jsonpath="{.spec.initContainers[*].name}" -n $1 $2|tr -s '[[:space:]]' '\n' |sort|uniq -c
+echo "Containers:"
+kubectl get pods -o jsonpath='{.spec.containers[*].name}' -n $1 $2|tr -s '[[:space:]]' '\n' |sort|uniq -c
+echo ""

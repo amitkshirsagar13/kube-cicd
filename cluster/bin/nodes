@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ ! -z "$1" ]
+then
+        kubectl describe nodes $1
+else
+        kubectl get nodes
+fi

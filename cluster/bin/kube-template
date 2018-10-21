@@ -1,0 +1,11 @@
+if [ ! -z "$1" ]
+then
+        if [ ! -z "$2" ]
+        then
+                kubectl describe XENTITY --namespace $1 $2
+        else
+                kubectl get XENTITY --namespace $1
+        fi
+else
+        kubectl get XENTITY --all-namespaces
+fi
