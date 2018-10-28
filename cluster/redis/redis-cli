@@ -1,0 +1,1 @@
+docker run -it --rm redis:alpine redis-cli -p ${2:-6379} -h ${1:-redis}
