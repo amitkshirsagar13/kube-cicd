@@ -1,5 +1,7 @@
 ### Setup Provider for terraform:
 ```
+az login --allow-no-subscriptions
+
 az account show --query "{subscriptionId:id, tenantId:tenantId}"
 
 az account set --subscription="${SUBSCRIPTION_ID}"
