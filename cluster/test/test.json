@@ -1,0 +1,251 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "creationTimestamp": "2018-10-21T13:27:40Z",
+        "generateName": "test-5d56f749b7-",
+        "labels": {
+            "app": "test",
+            "pod-template-hash": "1812930563"
+        },
+        "name": "test-5d56f749b7-qr4lj",
+        "namespace": "test",
+        "ownerReferences": [
+            {
+                "apiVersion": "apps/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicaSet",
+                "name": "test-5d56f749b7",
+                "uid": "15479dc8-d535-11e8-8b04-5c260a3ea2c1"
+            }
+        ],
+        "resourceVersion": "812826",
+        "selfLink": "/api/v1/namespaces/test/pods/test-5d56f749b7-qr4lj",
+        "uid": "1570ed01-d535-11e8-8b04-5c260a3ea2c1"
+    },
+    "spec": {
+        "containers": [
+            {
+                "image": "gcr.io/google_containers/echoserver:1.4",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "echoserver",
+                "ports": [
+                    {
+                        "containerPort": 8080,
+                        "name": "echo",
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/data/echo",
+                        "name": "test"
+                    },
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-bq55p",
+                        "readOnly": true
+                    }
+                ]
+            },
+            {
+                "env": [
+                    {
+                        "name": "PORT",
+                        "value": "8081"
+                    }
+                ],
+                "image": "tenzer/http-echo-test",
+                "imagePullPolicy": "Always",
+                "name": "backend",
+                "ports": [
+                    {
+                        "containerPort": 8081,
+                        "name": "backend",
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {
+                    "limits": {
+                        "cpu": "10m",
+                        "memory": "20Mi"
+                    },
+                    "requests": {
+                        "cpu": "10m",
+                        "memory": "20Mi"
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/data/back",
+                        "name": "test"
+                    },
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-bq55p",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "imagePullSecrets": [
+            {
+                "name": "regsecret"
+            }
+        ],
+        "initContainers": [
+            {
+                "command": [
+                    "sh",
+                    "-c",
+                    "/run/sample/initScript.sh"
+                ],
+                "image": "amitkshirsagar13/k8s-init-container:latest",
+                "imagePullPolicy": "Always",
+                "name": "init",
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/data/init",
+                        "name": "test"
+                    },
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-bq55p",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "nodeName": "k8n1.k8cluster.io",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "hostPath": {
+                    "path": "/data/test",
+                    "type": ""
+                },
+                "name": "test"
+            },
+            {
+                "name": "default-token-bq55p",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-bq55p"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2018-10-21T13:27:51Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2018-10-21T13:28:01Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2018-10-21T13:28:01Z",
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2018-10-21T13:27:40Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://89749de52669452c53b3b4e6c1823a6b963d0c36114e9147df4481b9452a9fb5",
+                "image": "tenzer/http-echo-test:latest",
+                "imageID": "docker-pullable://tenzer/http-echo-test@sha256:b1ba7c144d8e69f485dc9240ac3698f210fa99cbe5643c7f24f3042dea3f8bdf",
+                "lastState": {},
+                "name": "backend",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2018-10-21T13:28:00Z"
+                    }
+                }
+            },
+            {
+                "containerID": "docker://89ae593484728aaec10162bc8a782bdd6d309f185f22f680f4294fe9e5ab5181",
+                "image": "gcr.io/google_containers/echoserver:1.4",
+                "imageID": "docker-pullable://gcr.io/google_containers/echoserver@sha256:5d99aa1120524c801bc8c1a7077e8f5ec122ba16b6dda1a5d3826057f67b9bcb",
+                "lastState": {},
+                "name": "echoserver",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2018-10-21T13:27:53Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "192.168.1.123",
+        "initContainerStatuses": [
+            {
+                "containerID": "docker://02152300cb1c38131d6fd190ba53cdadefb2e6de6afbfc772286e1c7b2cbf507",
+                "image": "amitkshirsagar13/k8s-init-container:latest",
+                "imageID": "docker-pullable://amitkshirsagar13/k8s-init-container@sha256:3e87b26edf61eb93d1169f7ac9a1cae073bd355da046cd7bef90288722012155",
+                "lastState": {},
+                "name": "init",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "terminated": {
+                        "containerID": "docker://02152300cb1c38131d6fd190ba53cdadefb2e6de6afbfc772286e1c7b2cbf507",
+                        "exitCode": 0,
+                        "finishedAt": "2018-10-21T13:27:50Z",
+                        "reason": "Completed",
+                        "startedAt": "2018-10-21T13:27:49Z"
+                    }
+                }
+            }
+        ],
+        "phase": "Running",
+        "podIP": "10.244.0.202",
+        "qosClass": "Burstable",
+        "startTime": "2018-10-21T13:27:40Z"
+    }
+}
