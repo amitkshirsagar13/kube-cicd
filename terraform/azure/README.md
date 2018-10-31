@@ -10,15 +10,8 @@ terraform init
 
 terraform plan
 
-
-
-
-
-
-
-
-
 #Create Service Principle for terraform to use (Create from GUI in Active Directory Application)
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"
 
 ```
+

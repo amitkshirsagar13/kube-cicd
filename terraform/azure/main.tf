@@ -30,18 +30,18 @@ resource "azurerm_network_interface" "nic" {
     name                          = "dev_a_configuration"
     private_ip_address_allocation = "static"
     subnet_id                     = "${azurerm_subnet.dev.id}"
-    private_ip_address            = "10.0.1.2"
+    private_ip_address            = "10.0.1.11"
   }
 }
 
-data "azurerm_resource_group" "image" {
-  name = "dev_images"
-}
+# data "azurerm_resource_group" "image" {
+#   name = "dev_images"
+# }
 
-data "azurerm_image" "image" {
-  name                = "kong"
-  resource_group_name = "${data.azurerm_resource_group.image.name}"
-}
+# data "azurerm_image" "image" {
+#   name                = "kong"
+#   resource_group_name = "${data.azurerm_resource_group.image.name}"
+# }
 
 resource "azurerm_virtual_machine" "next_edge" {
   name                  = "${var.owner}-vm"
@@ -56,17 +56,16 @@ resource "azurerm_virtual_machine" "next_edge" {
   # Uncomment this line to delete the data disks automatically when deleting the VM
   delete_data_disks_on_termination = true
 
+  # storage_image_reference {
+  #   id = "${data.azurerm_image.image.id}"
+  # }
+
   storage_image_reference {
-    id = "${data.azurerm_image.image.id}"
+    publisher = "OpenLogic"
+    offer     = "CentOS"
+    sku       = "7.3"
+    version   = "latest"
   }
-
-  #   storage_image_reference {
-  #     publisher = "OpenLogic"
-  #     offer = "CentOS"
-  #     sku = "7.3"
-  #     version = "latest"
-  #   }
-
   storage_os_disk {
     name              = "kong_root"
     caching           = "ReadWrite"
