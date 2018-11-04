@@ -145,6 +145,15 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
     admin_username       = "tadmin"
     admin_password       = "Pass#123"
     custom_data          = "${file("web.conf")}"
+
+    # custom_data = <<-EOF
+    #   #!/bin/bash
+    #   sudo echo "bootscript initiated" > /tmp/results.txt 
+    #   sudo yum install -y nginx >> /tmp/results.txt 
+    #   sudo systemctl enable --now nginx >> /tmp/results.txt 
+    #   sudo systemctl start nginx >> /tmp/results.txt 
+    #   sudo echo "bootscript finished" >> /tmp/results.txt 
+    #   EOF
   }
   os_profile_linux_config {
     disable_password_authentication = false
