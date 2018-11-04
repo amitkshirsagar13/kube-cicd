@@ -1,35 +1,30 @@
 {
     "variables": {
-        "tenant_id": "{{env `ARM_TENANT_ID`}}",
-        "client_id": "{{env `ARM_CLIENT_ID`}}",
-        "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
-        "resource_group": "{{env `ARM_RESOURCE_GROUP`}}",
-        "storage_account": "{{env `ARM_STORAGE_ACCOUNT`}}",
-        "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}"
+        "client_id": "cd5e7636-c9cc-4f52-baed-5bd49f38b746",
+        "client_secret": "8144a0ad-b35b-4668-b792-b949fe028cd7",
+        "tenant_id": "b1708f4e-22a8-4d47-9280-1bfec7c5968f",
+        "subscription_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "resource_group": "dev"
     },
     "builders": [
         {
             "type": "azure-arm",
-            "client_id": "{{user `client_id`}}",
-            "client_secret": "{{user `client_secret`}}",
-            "resource_group_name": "{{user `resource_group`}}",
-            "storage_account": "{{user `storage_account`}}",
-            "subscription_id": "{{user `subscription_id`}}",
-            "tenant_id": "{{user `tenant_id`}}",
-            "capture_container_name": "images",
-            "capture_name_prefix": "packer",
+            "client_id": "cd5e7636-c9cc-4f52-baed-5bd49f38b746",
+            "client_secret": "8144a0ad-b35b-4668-b792-b949fe028cd7",
+            "tenant_id": "b1708f4e-22a8-4d47-9280-1bfec7c5968f",
+            "subscription_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            "managed_image_resource_group_name": "dev",
+            "managed_image_name": "custom-centos",
             "os_type": "Linux",
-            "image_publisher": "Canonical",
-            "image_offer": "UbuntuServer",
-            "image_sku": "16.04-LTS",
+            "image_publisher": "OpenLogic",
+            "image_offer": "CentOS",
+            "image_sku": "7.3",
             "azure_tags": {
                 "dept": "Engineering",
                 "task": "Image deployment"
             },
             "location": "West US",
-            "vm_size": "Standard_DS2_v2",
-            "managed_image_resource_group_name": "sampleresource",
-            "managed_image_name": "kong"
+            "vm_size": "Standard_DS1"
         }
     ],
     "provisioners": [

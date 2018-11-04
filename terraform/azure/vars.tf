@@ -1,26 +1,42 @@
-variable "region" {
-  description = "The aws region where to deploy this code (e.g. us-east-1)."
-  default = "us-east-1"
-}
-
-variable "location" {
-  description = "The azure region where to deploy this code (e.g. West US)."
-  default = "West US"
-}
-
-variable "environment" {
-  description = "Environment name."
-#  default = "dev_a"
-}
-
-variable "owner" {
-    description = "Owner for the resources"
+variable "rowner" {
+    description = "Process Owner for the resources"
     default = "terraform"
 }
-variable "tagOwner" {
+
+variable "rtags" {
     type = "map"
     description = "define new custom variable here"
     default = {
         resourceOwner = "terraform"
     }
+}
+
+variable "renvironment" {
+  description = "Environment name for the Terraform."
+  # If default value not provided, will be prompted at run time.
+#  default = "dev_a"
+}
+
+variable "rgroup" {
+  description = "Resource Group for execution"
+  default = "dev"
+}
+
+variable "sgroup" {
+  description = "Security Group for network"
+  default = "dev"
+}
+
+variable "rlocation" {
+    description = "Geo-Location of the cloud Resource"
+    default = "West US"
+}
+
+variable "rnet" {
+  description = "vnet name"
+  default = "dev"
+}
+variable "rsubnet" {
+  description = "Subnet name"
+  default = "dev"
 }
