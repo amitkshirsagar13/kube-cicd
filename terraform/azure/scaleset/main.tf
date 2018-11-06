@@ -288,8 +288,8 @@ resource "azurerm_autoscale_setting" "as" {
 
     capacity {
       default = 2
-      minimum = 2
-      maximum = 10
+      minimum = 1
+      maximum = 3
     }
 
     rule {
