@@ -20,17 +20,6 @@ resource "azurerm_subnet" "dev" {
   depends_on           = ["azurerm_resource_group.rg", "azurerm_virtual_network.vnet"]
 }
 
-resource "azurerm_lb" "lb" {
-  name                = "dev_lb"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
-
-  frontend_ip_configuration {
-    name                 = "PublicIPAddress"
-    public_ip_address_id = "${azurerm_public_ip.test.id}"
-  }
-}
-
 resource "azurerm_public_ip" "dev" {
   name                         = "dev_public_ip"
   location                     = "${azurerm_resource_group.rg.location}"
@@ -139,8 +128,31 @@ resource "azurerm_virtual_machine" "terravm" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+  provisioner "file" {
+    source      = "base-setup.sh"
+    destination = "/tmp/base-setup.sh"
+
+    connection {
+      type     = "ssh"
+      user     = "master"
+      password = "Pass#123"
+    }
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "echo Pass#123 |sudo -S chmod -x /tmp/base-setup.sh",
+      "echo Pass#123 |sudo -S sh /tmp/base-setup.sh",
+    ]
+
+    connection {
+      type     = "ssh"
+      user     = "master"
+      password = "Pass#123"
+    }
+  }
   tags {
     environment = "dev"
+    init        = "yes"
     owner       = "${var.rowner}"
   }
 }
