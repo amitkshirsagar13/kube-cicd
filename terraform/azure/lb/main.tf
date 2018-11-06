@@ -169,6 +169,27 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
       load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
     }
   }
+  
+  provisioner "file" {
+    source      = "base-setup.sh"
+    destination = "/tmp/base-setup.sh"
+    connection {
+      type     = "ssh"
+      user     = "tadmin"
+      password = "Pass#123"
+    }
+  }
+  provisioner "remote-exec" {
+    inline = [
+        "echo Pass#123 |sudo -S chmod -x /tmp/base-setup.sh",
+        "echo Pass#123 |sudo -S sh /tmp/base-setup.sh",
+    ]
+    connection {
+      type     = "ssh"
+      user     = "tadmin"
+      password = "Pass#123"
+    }
+  }
   tags {
     environment = "terraform"
   }
@@ -233,7 +254,26 @@ resource "azurerm_virtual_machine" "jumpbox" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-
+  provisioner "file" {
+    source      = "base-setup.sh"
+    destination = "/tmp/base-setup.sh"
+    connection {
+      type     = "ssh"
+      user     = "tadmin"
+      password = "Pass#123"
+    }
+  }
+  provisioner "remote-exec" {
+    inline = [
+        "echo Pass#123 |sudo -S chmod -x /tmp/base-setup.sh",
+        "echo Pass#123 |sudo -S sh /tmp/base-setup.sh",
+    ]
+    connection {
+      type     = "ssh"
+      user     = "tadmin"
+      password = "Pass#123"
+    }
+  }
   tags {
     environment = "terraform"
   }
