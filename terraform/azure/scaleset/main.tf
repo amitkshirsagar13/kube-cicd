@@ -271,32 +271,33 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   #     user     = "tadmin"
   #     password = "Pass#123"
 
+
   #     bastion_host     = "${azurerm_public_ip.jumpbox.fqdn}"
   #     bastion_user     = "tadmin"
   #     bastion_password = "Pass#123"
   #   }
   # }
-  provisioner "remote-exec" {
-    inline = [
-      "echo Pass#123 |sudo -S yum install -y yum-utils device-mapper-persistent-data lvm2",
-      "echo Pass#123 |sudo -S yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
-      "echo Pass#123 |sudo -S yum install -y docker-ce",
-      "echo Pass#123 |sudo -S systemctl enable docker",
-      "echo Pass#123 |sudo -S systemctl start docker",
-    ]
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "echo Pass#123 |sudo -S yum install -y yum-utils device-mapper-persistent-data lvm2",
+  #     "echo Pass#123 |sudo -S yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
+  #     "echo Pass#123 |sudo -S yum install -y docker-ce",
+  #     "echo Pass#123 |sudo -S systemctl enable docker",
+  #     "echo Pass#123 |sudo -S systemctl start docker",
+  #   ]
 
-    connection {
-      type             = "ssh"
-      host             = "${element(azurerm_network_interface.nic.*.private_ip_address, count.index)}"
-      user             = "tadmin"
-      password         = "Pass#123"
-      agent            = false
-      bastion_host     = "${azurerm_public_ip.jumpbox.fqdn}"
-      bastion_user     = "tadmin"
-      bastion_password = "Pass#123"
-      timeout          = "10s"
-    }
-  }
+  #   connection {
+  #     type             = "ssh"
+  #     host             = "${element(azurerm_lb_backend_address_pool.bpepool, count.index)}"
+  #     user             = "tadmin"
+  #     password         = "Pass#123"
+  #     agent            = false
+  #     bastion_host     = "${azurerm_public_ip.jumpbox.fqdn}"
+  #     bastion_user     = "tadmin"
+  #     bastion_password = "Pass#123"
+  #     timeout          = "10s"
+  #   }
+  # }
   depends_on = ["azurerm_virtual_machine.jumpbox"]
 }
 
