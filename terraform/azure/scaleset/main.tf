@@ -87,101 +87,6 @@ variable "location" {
   default     = "West US"
 }
 
-# data "azurerm_resource_group" "image" {
-#   name = "myResourceGroup"
-# }
-
-# data "azurerm_image" "image" {
-#   name                = "myPackerImage"
-#   resource_group_name = "${data.azurerm_resource_group.image.name}"
-# }
-
-resource "azurerm_virtual_machine_scale_set" "vmss" {
-  name                = "vmscaleset"
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.vmss.name}"
-  upgrade_policy_mode = "Manual"
-
-  sku {
-    name     = "Standard_DS1"
-    tier     = "Standard"
-    capacity = 2
-  }
-
-  #   storage_profile_image_reference {
-  #     id = "${data.azurerm_image.image.id}"
-  #   }
-
-  storage_profile_image_reference {
-    publisher = "OpenLogic"
-    offer     = "CentOS"
-    sku       = "7.3"
-    version   = "latest"
-  }
-  # plan {
-  #   name      = "cis-oracle7-l1"
-  #   publisher = "center-for-internet-security-inc"
-  #   product   = "cis-oracle-linux-7-v2-0-0-l1"
-  # }
-  storage_profile_os_disk {
-    name              = ""
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-  storage_profile_data_disk {
-    lun           = 0
-    caching       = "ReadWrite"
-    create_option = "Empty"
-    disk_size_gb  = 10
-  }
-  os_profile {
-    computer_name_prefix = "terravmss"
-    admin_username       = "tadmin"
-    admin_password       = "Pass#123"
-    custom_data          = "${file("web.conf")}"
-  }
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
-  network_profile {
-    name    = "terraformnetworkprofile"
-    primary = true
-
-    ip_configuration {
-      name                                   = "IPConfiguration"
-      primary                                = true
-      subnet_id                              = "${azurerm_subnet.vmss.id}"
-      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
-    }
-  }
-  tags {
-    environment = "terraform"
-  }
-  provisioner "file" {
-    source      = "base-setup.sh"
-    destination = "/tmp/base-setup.sh"
-
-    connection {
-      type     = "ssh"
-      user     = "tadmin"
-      password = "Pass#123"
-    }
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "echo Pass#123 |sudo -S chmod -x /tmp/base-setup.sh",
-      "echo Pass#123 |sudo -S sh /tmp/base-setup.sh",
-    ]
-
-    connection {
-      type     = "ssh"
-      user     = "tadmin"
-      password = "Pass#123"
-    }
-  }
-}
-
 resource "azurerm_public_ip" "jumpbox" {
   name                         = "jumpbox-public-ip"
   location                     = "${var.location}"
@@ -265,6 +170,13 @@ resource "azurerm_virtual_machine" "jumpbox" {
       "echo Pass#123 |sudo -S sh /tmp/base-setup.sh",
     ]
 
+    # "echo Pass#123 |sudo -S chmod 777 /etc/sysctl.conf",
+    # "echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf",
+    # "echo Pass#123 |sudo -S sysctl -p",
+    # "echo Pass#123 |sudo -S firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o eth0 -j MASQUERADE",
+    # "echo Pass#123 |sudo -S firewall-cmd --permanent --direct --passthrough ipv4 -I FORWARD -i eth1 -j ACCEPT",
+    # "echo Pass#123 |sudo -S firewall-cmd --reload",
+
     connection {
       type     = "ssh"
       user     = "tadmin"
@@ -275,6 +187,117 @@ resource "azurerm_virtual_machine" "jumpbox" {
 
 output "jumpbox_public_ip" {
   value = "${azurerm_public_ip.jumpbox.fqdn}"
+}
+
+# data "azurerm_resource_group" "image" {
+#   name = "myResourceGroup"
+# }
+
+# data "azurerm_image" "image" {
+#   name                = "myPackerImage"
+#   resource_group_name = "${data.azurerm_resource_group.image.name}"
+# }
+
+resource "azurerm_virtual_machine_scale_set" "vmss" {
+  name                = "vmscaleset"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.vmss.name}"
+  upgrade_policy_mode = "Manual"
+
+  sku {
+    name     = "Standard_DS1"
+    tier     = "Standard"
+    capacity = 2
+  }
+
+  #   storage_profile_image_reference {
+  #     id = "${data.azurerm_image.image.id}"
+  #   }
+
+  storage_profile_image_reference {
+    publisher = "OpenLogic"
+    offer     = "CentOS"
+    sku       = "7.3"
+    version   = "latest"
+  }
+  # plan {
+  #   name      = "cis-oracle7-l1"
+  #   publisher = "center-for-internet-security-inc"
+  #   product   = "cis-oracle-linux-7-v2-0-0-l1"
+  # }
+  storage_profile_os_disk {
+    name              = ""
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+  storage_profile_data_disk {
+    lun           = 0
+    caching       = "ReadWrite"
+    create_option = "Empty"
+    disk_size_gb  = 10
+  }
+  os_profile {
+    computer_name_prefix = "terravmss"
+    admin_username       = "tadmin"
+    admin_password       = "Pass#123"
+    custom_data          = "${file("web.conf")}"
+  }
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+  network_profile {
+    name    = "terraformnetworkprofile"
+    primary = true
+
+    ip_configuration {
+      name                                   = "IPConfiguration"
+      primary                                = true
+      subnet_id                              = "${azurerm_subnet.vmss.id}"
+      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
+    }
+  }
+  tags {
+    environment = "terraform"
+  }
+
+  # provisioner "file" {
+  #   source      = "base-setup.sh"
+  #   destination = "/tmp/base-setup.sh"
+
+
+  #   connection {
+  #     type     = "ssh"
+  #     user     = "tadmin"
+  #     password = "Pass#123"
+
+  #     bastion_host     = "${azurerm_public_ip.jumpbox.fqdn}"
+  #     bastion_user     = "tadmin"
+  #     bastion_password = "Pass#123"
+  #   }
+  # }
+  provisioner "remote-exec" {
+    inline = [
+      "echo Pass#123 |sudo -S yum install -y yum-utils device-mapper-persistent-data lvm2",
+      "echo Pass#123 |sudo -S yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
+      "echo Pass#123 |sudo -S yum install -y docker-ce",
+      "echo Pass#123 |sudo -S systemctl enable docker",
+      "echo Pass#123 |sudo -S systemctl start docker",
+    ]
+
+    connection {
+      type             = "ssh"
+      host             = "${element(azurerm_network_interface.nic.*.private_ip_address, count.index)}"
+      user             = "tadmin"
+      password         = "Pass#123"
+      agent            = false
+      bastion_host     = "${azurerm_public_ip.jumpbox.fqdn}"
+      bastion_user     = "tadmin"
+      bastion_password = "Pass#123"
+      timeout          = "10s"
+    }
+  }
+  depends_on = ["azurerm_virtual_machine.jumpbox"]
 }
 
 resource "azurerm_autoscale_setting" "as" {

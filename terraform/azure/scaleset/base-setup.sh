@@ -12,5 +12,6 @@ yum install -y docker-ce
 echo "`date` : Enable and start docker-ce" >> /tmp/log.script.log
 systemctl enable docker
 systemctl start docker
+sed -i -e "s/^#    AllowTcpForwarding no/AllowTcpForwarding yes/g" /etc/ssh/sshd_config
 echo "`date` : Finished installing Docker docker-ce" >> /tmp/log.script.log
 exit
