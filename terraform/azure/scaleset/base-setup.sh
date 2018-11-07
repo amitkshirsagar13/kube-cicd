@@ -13,5 +13,6 @@ echo "`date` : Enable and start docker-ce" >> /tmp/log.script.log
 systemctl enable docker
 systemctl start docker
 sed -i -e "s/^#    AllowTcpForwarding no/AllowTcpForwarding yes/g" /etc/ssh/sshd_config
+systemctl restart sshd
 echo "`date` : Finished installing Docker docker-ce" >> /tmp/log.script.log
 exit
