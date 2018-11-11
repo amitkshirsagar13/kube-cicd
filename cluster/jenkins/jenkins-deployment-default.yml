@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: jenkins:2.60.3-alpine
+        image: jenkinsci/jenkins:lts-alpine
         imagePullPolicy: Always
         env:
           - name: ARGS_CUSTOM
