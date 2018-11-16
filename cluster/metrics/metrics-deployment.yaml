@@ -88,7 +88,7 @@ spec:
       containers:
       - name: metrics-server
         image: k8s.gcr.io/metrics-server-amd64:v0.3.1
-        imagePullPolicy: Always
+        #imagePullPolicy: Always
         command:
         - /metrics-server
         - --kubelet-preferred-address-types=InternalIP
