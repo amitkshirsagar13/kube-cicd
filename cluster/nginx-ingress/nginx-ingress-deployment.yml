@@ -131,5 +131,5 @@ spec:
         args:
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
           - -default-server-tls-secret=$(POD_NAMESPACE)/nginx-tls-secret
-          - -default-backend-service=nginx-ingress/default-http-backend
+         #- -default-backend-service=nginx-ingress/default-http-backend
          #- -v=3 # Enables extensive logging. Useful for trooublshooting.
