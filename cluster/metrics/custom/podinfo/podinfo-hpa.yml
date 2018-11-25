@@ -12,10 +12,10 @@ spec:
     kind: Deployment
     name: podinfo
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      targetAverageUtilization: 80
+  # - type: Resource
+  #   resource:
+  #     name: cpu
+  #     targetAverageUtilization: 80
   # - type: Resource
   #   resource:
   #     name: memory
@@ -23,4 +23,8 @@ spec:
   - type: Pods
     pods:
       metricName: http_requests
-      targetAverageValue: 10
+      targetAverageValue: 2
+  - type: Pods
+    pods:
+      metricName: cpu_usage
+      targetAverageValue: 5m
