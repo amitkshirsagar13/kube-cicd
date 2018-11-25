@@ -8,4 +8,6 @@ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/namespaces/monitoring/pods/prome
 
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/network_tcp_usage" | jq .
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/kube-system/pods/*/spec_cpu_quota" | jq .
+
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/test/pods/*/http_requests" | jq .
 ```
