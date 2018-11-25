@@ -25,8 +25,8 @@ spec:
         command:
           - ./podinfo
           - --port=9898
-#          - --logtostderr=true
-          - -v=1
+          # - --logtostderr=true
+          # - -v=1
         volumeMounts:
           - name: metadata
             mountPath: /etc/podinfod/metadata
