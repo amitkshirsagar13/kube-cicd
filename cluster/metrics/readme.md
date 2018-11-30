@@ -9,9 +9,11 @@ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/namespaces/monitoring/pods/prome
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/network_tcp_usage" | jq .
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/kube-system/pods/*/spec_cpu_quota" | jq .
 
+
+#KONG
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/test/pods/*/http_requests" | jq .
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/kong/pods/*/kong_nginx_http_current_connections" | jq .
+
+#NGINX
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/nginx-ingress/pods/*/nginx_http_requests" | jq .
 ```
-
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/" | jq .|grep nginx
-
