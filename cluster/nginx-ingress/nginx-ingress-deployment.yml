@@ -108,6 +108,9 @@ spec:
     metadata:
       labels:
         app: nginx-ingress
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9113"
     spec:
       serviceAccountName: nginx-ingress
       tolerations:
@@ -115,8 +118,8 @@ spec:
         operator: "Exists"
         effect: "NoSchedule"
       containers:
-      - image: nginx/nginx-ingress
-        name: nginx-ingress
+      - name: nginx-ingress
+        image: nginx/nginx-ingress
         ports:
         - name: http
           containerPort: 80
@@ -134,3 +137,13 @@ spec:
           - -default-server-tls-secret=$(POD_NAMESPACE)/nginx-tls-secret
          #- -default-backend-service=nginx-ingress/default-http-backend
          #- -v=3 # Enables extensive logging. Useful for trooublshooting.
+      - name: nginx-prometheus-exporter
+        image: nginx/nginx-prometheus-exporter:0.2.0
+        ports:
+        - name: prometheus
+          containerPort: 9113
+        args:
+          - -web.listen-address
+          - :9113
+          - -nginx.scrape-uri
+          - http://127.0.0.1:8080/stub_status
