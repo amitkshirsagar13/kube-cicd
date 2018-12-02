@@ -147,3 +147,36 @@ spec:
           - :9113
           - -nginx.scrape-uri
           - http://127.0.0.1:8080/stub_status
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-ingress
+  namespace: nginx-ingress
+spec:
+  selector:
+    app: nginx-ingress
+  ports:
+    - protocol: TCP
+      port: 9113
+      targetPort: 9113
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: nginx-ingress
+spec:
+  tls:
+  - hosts:
+    - nginx.k8n1.k8cluster.io
+    secretName: nginx-tls-secret
+  rules:
+  - host: nginx.k8n1.k8cluster.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-ingress
+          servicePort: 9113
