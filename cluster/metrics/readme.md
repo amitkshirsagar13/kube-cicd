@@ -17,3 +17,11 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/kong/pods/*/ko
 #NGINX
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/nginx-ingress/pods/*/nginx_http_requests" | jq .
 ```
+
+
+for ((i=1;i<=110;i++)); do curl -k --resolve cafe.example.com:443:23.99.220.156 https://cafe.example.com:443/ ; done
+curl -k --resolve cafe.example.com:443:23.99.220.156 https://cafe.example.com:443/tea
+
+ab -c 150 -n 10000 https://cafe.example.com:443/tea
+
+curl -k --resolve grafana.k8cluster.io:443:23.99.220.156 https://grafana.k8cluster.io:443/
