@@ -72,7 +72,7 @@ spec:
     spec:
       containers:
       - name: kubernetes-dashboard
-        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0
+        image: k8s.gcr.io/kubernetes-dashboard-amd64:latest
         ports:
         - containerPort: 8443
           protocol: TCP
@@ -119,8 +119,12 @@ metadata:
   namespace: kube-system
 spec:
   ports:
-    - port: 443
+    - name: dashboard
+      protocol: TCP
+      port: 443
       targetPort: 8443
+      nodePort: 30083
+  type: NodePort
   selector:
     k8s-app: kubernetes-dashboard
 ---
@@ -157,10 +161,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - kdashboard.k8n1.k8cluster.io
+    - kdashboard.k8mac.k8cluster.io
     secretName: kubernetes-dashboard-secret
   rules:
-  - host: kdashboard.k8n1.k8cluster.io
+  - host: kdashboard.k8mac.k8cluster.io
     http:
       paths:
       - path: /
