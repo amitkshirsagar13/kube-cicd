@@ -1,0 +1,29 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jenkins-persistent-repository-storage
+  namespace: kubernetes-plugin
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 4Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/User/admin/data/m2/repository"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jenkins-persistent-repository-storage-claim
+  namespace: kubernetes-plugin
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
