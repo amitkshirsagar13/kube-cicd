@@ -10,9 +10,9 @@ source colorCode.sh
 echo echo "[ ${GREEN}INFO${NC} ] Checking if user is root"
 
 if [[ $EUID -ne 0 ]]; then
-    echo echo "[ ${RED}ERROR${NC} ] This script must be run as root" 
+    echo "[ ${RED}ERROR${NC} ] This script must be run as root" 
     exit 1
 else
-    echo echo "[ ${GREEN}INFO${NC} ] Running setup as Root"
+    echo "[ ${GREEN}INFO${NC} ] Running setup as Root"
 fi
 echo ""
