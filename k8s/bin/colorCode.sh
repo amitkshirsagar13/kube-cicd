@@ -7,6 +7,6 @@
 #!/bin/bash
 RED=`tput setaf 1`
 BLUE=`tput setaf 4`
-GREEN=`tput setaf 2`
+GREEN=`tput setaf 6`
 NC=`tput setaf 7` # No Color
 
